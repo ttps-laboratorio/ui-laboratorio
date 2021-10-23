@@ -13,6 +13,7 @@ import { Credentials } from '../../models/credentials';
 export class AuthPageComponent {
   public todayDate: Date = new Date();
   public routers: typeof routes = routes;
+  public loginError:boolean = false;
 
   constructor(
     private service: AuthService,
@@ -20,10 +21,15 @@ export class AuthPageComponent {
   ) { }
 
   public sendLoginForm(credentials:Credentials): void {
-    console.log(credentials);
-    this.service.login(credentials).subscribe(data => this.router.navigate([this.routers.DASHBOARD]).then());
-
-    // this.router.navigate([this.routers.DASHBOARD]).then();
+    this.service.login(credentials).subscribe({
+      next:(success) => {
+        if (success)
+          this.router.navigate([this.routers.DASHBOARD]);
+        else
+        this.loginError=!success;
+      },
+      error:(error) => this.loginError=true
+    });
   }
 
 }

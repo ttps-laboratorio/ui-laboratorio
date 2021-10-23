@@ -1,14 +1,16 @@
 <form class="form" [formGroup]="form" (ngSubmit)="login()">
+  <mat-error *ngIf="this.loginError == true">Las credenciales ingresadas son incorrectas</mat-error>
   <mat-form-field class="form__input">
-    <input matInput placeholder="Username" type="username" formControlName="username">
+    <input matInput placeholder="Username" type="username" formControlName="username" (change)="reset()">
+    <mat-error *ngIf="this.form.get('username') && this.form.get('username').errors?.required && (this.form.get('username').dirty || this.form.get('username').touched)">Username is required</mat-error>
   </mat-form-field>
 
   <mat-form-field class="form__input">
-    <input matInput placeholder="Password" type="password" formControlName="password">
+    <input matInput placeholder="Password" type="password" formControlName="password" (change)="reset()">
+    <mat-error *ngIf="this.form.get('password') && this.form.get('password').errors?.required && (this.form.get('password').dirty || this.form.get('password').touched)">Password is required</mat-error>
   </mat-form-field>
 
-  <div class="form-actions">
+  <div class="form-actions" style="margin-top: 0.2em;">
     <button class="form-actions__login" mat-raised-button color="primary" type="submit">Login</button>
-    <!-- <button class="form-actions__forget" mat-button>Forget password</button> -->
   </div>
 </form>

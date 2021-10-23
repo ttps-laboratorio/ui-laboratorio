@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Credentials } from '../../models/credentials';
 
@@ -10,7 +10,9 @@ import { Credentials } from '../../models/credentials';
 export class LoginFormComponent implements OnInit {
   @Output() sendLoginForm = new EventEmitter<Credentials>();
   public form: FormGroup;
-  public credentials : Credentials = {"username":"an username","password" : "secret"}
+  public credentials : Credentials = {"username":"","password" : ""}
+  @Input()
+  public loginError:boolean;
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -21,8 +23,14 @@ export class LoginFormComponent implements OnInit {
 
   public login(): void {
     if (this.form.valid) {
-      let cred:Credentials = {"username":this.form.get('username').value, "password":this.form.get('password').value};
-      this.sendLoginForm.emit(cred);
+      this.credentials = {"username":this.form.get('username').value, "password":this.form.get('password').value};
+      this.sendLoginForm.emit(this.credentials);
     }
+  }
+
+  public reset(): void {
+    console.log("reset");
+    this.form.reset;
+    this.loginError=false;
   }
 }
