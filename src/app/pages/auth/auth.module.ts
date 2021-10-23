@@ -11,6 +11,9 @@ import { YearPipe } from './pipes';
 import { AuthService, EmailService } from './services';
 import { LoginFormComponent } from './components';
 import { AuthGuard } from './guards';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiService } from './services/api.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { AuthGuard } from './guards';
     LoginFormComponent
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     AuthRoutingModule,
     MatTabsModule,
@@ -30,7 +34,9 @@ import { AuthGuard } from './guards';
   providers: [
     AuthService,
     EmailService,
-    AuthGuard
+    ApiService,
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })
 export class AuthModule { }
