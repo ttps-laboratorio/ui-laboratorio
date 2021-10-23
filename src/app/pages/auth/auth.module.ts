@@ -14,6 +14,7 @@ import { AuthGuard } from './guards';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ConfiguratorGuard } from './guards/configurator.guard';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     EmailService,
     ApiService,
     AuthGuard,
+    ConfiguratorGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ]
 })

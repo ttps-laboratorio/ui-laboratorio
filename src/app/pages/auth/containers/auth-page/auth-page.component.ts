@@ -26,9 +26,9 @@ export class AuthPageComponent {
         if (success)
           this.router.navigate([this.routers.DASHBOARD]);
         else
-        this.loginError=!success;
+          this.loginError=true;
       },
-      error:(error) => this.loginError=true
+      error:(error) => this.loginError=true,
     });
   }
 

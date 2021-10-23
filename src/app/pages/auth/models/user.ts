@@ -26,7 +26,6 @@ export class User {
   }
 
   public canActivate(permission: string): boolean {
-      console.log(permission);
       return this.authorities.includes(permission);
   }
 }

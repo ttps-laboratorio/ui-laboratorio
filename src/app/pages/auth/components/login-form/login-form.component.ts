@@ -29,8 +29,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   public reset(): void {
-    console.log("reset");
     this.form.reset;
-    this.loginError=false;
+    //this.loginError=false;
   }
 }

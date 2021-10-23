@@ -11,16 +11,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { HeaderModule } from './header/header.module';
 import { SidebarConfiguratorComponent } from './sidebar-configurator/sidebar-configurator.component';
+import { SidebarAdministratorComponent } from './sidebar-administrator/sidebar-administrator.component';
 import { FooterComponent } from './footer/footer.component';
 import { SettingsMenuComponent } from './ui-elements/settings-menu/settings-menu.component';
 import { DateMenuComponent } from './ui-elements/date-menu/date-menu.component';
 import { LayoutComponent } from './layout/layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SidebarEmployeeComponent } from './sidebar-employee/sidebar-employee.component';
 
 
 @NgModule({
   declarations: [
     SidebarConfiguratorComponent,
+    SidebarAdministratorComponent,
+    SidebarEmployeeComponent,
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,
@@ -42,6 +46,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   exports: [
     HeaderModule,
     SidebarConfiguratorComponent,
+    SidebarEmployeeComponent,
+    SidebarAdministratorComponent,
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,

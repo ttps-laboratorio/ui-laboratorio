@@ -9,7 +9,9 @@
     [mode]="mobileQuery.matches ? 'over' : 'side'"
     [fixedInViewport]="mobileQuery.matches"
   >
-    <app-sidebar-configurator  *ngIf='!configurator'></app-sidebar-configurator>
+    <app-sidebar-configurator *ngIf='isConfigurator()'></app-sidebar-configurator>
+    <app-sidebar-administrator *ngIf='isAdministrator()'></app-sidebar-administrator>
+    <app-sidebar-employee *ngIf='isEmployee()'></app-sidebar-employee>
   </mat-sidenav>
   <mat-sidenav-content class="layout-content">
     <ng-content></ng-content>

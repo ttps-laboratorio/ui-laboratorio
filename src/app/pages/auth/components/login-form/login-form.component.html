@@ -1,5 +1,5 @@
 <form class="form" [formGroup]="form" (ngSubmit)="login()">
-  <mat-error *ngIf="this.loginError == true">Las credenciales ingresadas son incorrectas</mat-error>
+  <mat-error *ngIf="this.loginError">Las credenciales ingresadas son incorrectas</mat-error>
   <mat-form-field class="form__input">
     <input matInput placeholder="Username" type="username" formControlName="username" (change)="reset()">
     <mat-error *ngIf="this.form.get('username') && this.form.get('username').errors?.required && (this.form.get('username').dirty || this.form.get('username').touched)">Username is required</mat-error>

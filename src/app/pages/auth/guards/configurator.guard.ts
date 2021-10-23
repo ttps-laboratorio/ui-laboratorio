@@ -7,7 +7,7 @@ import { User } from '../models/user';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AuthGuard implements CanActivate{
+export class ConfiguratorGuard implements CanActivate{
   public routers: typeof routes = routes;
 
   constructor(private router: Router, private authService:AuthService) {
@@ -17,15 +17,13 @@ export class AuthGuard implements CanActivate{
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let user: User = this.authService.user;
-    if (user && next.data && next.data.permissions) {
-      for(let i=0;i<next.data.permissions.length;i++) {
-        let permission = next.data.permissions[i];
-        if (user.canActivate(permission)) {
-          return true;
-        }
-      };
+    if (user) {
+      if (user.canActivate("ROLE_CONFIGURATOR")) {
+        return true;
+      } else {
+        return false;
+      }
     }
-    this.router.navigate([routes.LOGIN]);
     return false;
   }
 }
