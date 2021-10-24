@@ -14,6 +14,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ConfiguratorModule } from './pages/configurator/configurator.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SharedModule,
     AuthModule,
     DashboardModule,
+    ConfiguratorModule,
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,

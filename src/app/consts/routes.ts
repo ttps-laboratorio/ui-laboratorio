@@ -4,6 +4,6 @@ export enum routes {
   PATIENT = '/patient',
   STUDY = '/study',
   HEALTH_INSURANSE = '/health-insuranse',
-  REFERING_DOCTOR = '/refering-doctor',
+  DOCTOR = '/doctor',
   LOGIN = '/login'
 }

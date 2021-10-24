@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { DashboardPageComponent } from './pages/dashboard/containers';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {AuthGuard} from './pages/auth/guards';
-import { ConfiguratorGuard } from './pages/auth/guards/configurator.guard';
+import { HealthInsuranseComponent } from './pages/configurator/containers/health-insuranse/health-insuranse.component';
+import { DoctorComponent } from './pages/configurator/containers/doctor/doctor.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,14 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { permissions: ["ROLE_CONFIGURATOR"] },
-    component: DashboardPageComponent
+    component: HealthInsuranseComponent
+  },
+  {
+    path: 'doctor',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { permissions: ["ROLE_CONFIGURATOR"] },
+    component: DoctorComponent
   },
   {
     path: 'dashboard',
