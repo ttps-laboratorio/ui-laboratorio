@@ -24,7 +24,7 @@ export class AuthPageComponent {
     this.service.login(credentials).subscribe({
       next:(success) => {
         if (success)
-          this.router.navigate([this.routers.DASHBOARD]);
+          this.router.navigate(['app']);
         else
           this.loginError=true;
       },
