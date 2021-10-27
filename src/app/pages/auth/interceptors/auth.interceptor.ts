@@ -10,7 +10,9 @@ import { catchError, retry, switchMap, filter, take } from 'rxjs/operators';
 import { AuthService } from '../services';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService, private router: Router) { }

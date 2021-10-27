@@ -14,11 +14,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderModule } from '../shared/header/header.module';
-import { SidebarAdministratorComponent } from '../shared/sidebar-administrator/sidebar-administrator.component';
-import { SidebarConfiguratorComponent } from '../shared/sidebar-configurator/sidebar-configurator.component';
-import { SidebarEmployeeComponent } from '../shared/sidebar-employee/sidebar-employee.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -27,9 +26,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     HomeComponent
   ],
   imports: [
+    FlexLayoutModule,
     FontAwesomeModule,
     HeaderModule,
     MatListModule,
+    MatIconModule,
+    MatTableModule,
     MatToolbarModule,
     MatIconModule,
     RouterModule,

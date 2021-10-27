@@ -13,6 +13,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NotFoundComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     BrowserModule,
     SharedModule,
@@ -29,6 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     ToastrModule.forRoot(),
     MatCardModule,
+    MatTableModule,
     MatButtonModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')

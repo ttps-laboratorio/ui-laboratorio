@@ -3,7 +3,6 @@ import {
   HttpClient,
   HttpHeaders,
   HttpParams,
-  HttpResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -32,8 +31,8 @@ export abstract class GenericService<T> {
     return this.http.post<T>(this.baseUrl, object);
   }
 
-  update<T extends { id: any; }>(object: T): Observable<T> {
-    return this.http.patch<T>(
+  update<T extends { id?: number; }>(object: T): Observable<T> {
+    return this.http.put<T>(
       `${this.baseUrl}/${object.id}`, object
     );
   }
