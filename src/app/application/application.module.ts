@@ -9,8 +9,6 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderModule } from '../shared/header/header.module';
 import { SharedModule } from '../shared/shared.module';
-import { MaterialModule } from '../material/material.module';
-
 
 @NgModule({
   declarations: [
@@ -19,7 +17,6 @@ import { MaterialModule } from '../material/material.module';
   ],
   imports: [
     FontAwesomeModule,
-    MaterialModule,
     HeaderModule,
     RouterModule,
     FormsModule,

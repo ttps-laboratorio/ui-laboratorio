@@ -17,7 +17,11 @@ import { SettingsMenuComponent } from './ui-elements/settings-menu/settings-menu
 import { DateMenuComponent } from './ui-elements/date-menu/date-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SidebarEmployeeComponent } from './sidebar-employee/sidebar-employee.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MaterialModule } from '../material/material.module';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { SuccessDialogComponent } from './dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,19 +31,17 @@ import { SidebarEmployeeComponent } from './sidebar-employee/sidebar-employee.co
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,
+    SuccessDialogComponent,
+    ErrorDialogComponent,
   ],
   imports: [
     FontAwesomeModule,
     HeaderModule,
-    MatListModule,
-    MatIconModule,
+    MaterialModule,
     RouterModule,
-    MatButtonModule,
     CommonModule,
-    MatMenuModule,
-    MatSelectModule,
     FormsModule,
-    MatSidenavModule
+    FlexLayoutModule,
   ],
   exports: [
     HeaderModule,
@@ -49,6 +51,14 @@ import { SidebarEmployeeComponent } from './sidebar-employee/sidebar-employee.co
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,
+    MaterialModule,
+    FlexLayoutModule,
+    SuccessDialogComponent,
+    ErrorDialogComponent,
+  ],
+  entryComponents: [
+    SuccessDialogComponent,
+    ErrorDialogComponent
   ]
 })
 export class SharedModule { }

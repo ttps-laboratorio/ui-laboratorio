@@ -8,6 +8,7 @@ const routes: Routes = [
     // { path: 'admin', loadChildren: '../admin/admin.module#AdminModule'},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'health-insurance', loadChildren: () => import('./health-insurance/health-insurance.module').then(m => m.HealthInsuranceModule)},
     // { path: 'home', loadChildren: '../home/home.module#HomeModule' },
     // { path: 'about', loadChildren: '../about/about.module#AboutModule' }
   ]}
