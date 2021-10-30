@@ -33,7 +33,7 @@ export abstract class GenericService<T> {
   }
 
   update<T extends { id?: number; }>(object: T): Observable<T> {
-    return this.http.patch<T>(
+    return this.http.put<T>(
       `${this.baseUrl}/${object.id}`, object
     );
   }
