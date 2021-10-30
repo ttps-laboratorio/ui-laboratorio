@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,6 +16,8 @@ export class HealthInsuranceListComponent implements OnInit {
 
   public displayedColumns = ['name', 'email', 'phone', 'details', 'update', 'delete'];
   public dataSource = new MatTableDataSource<HealthInsurance>();
+
+  public selectedHealthInsurance = new HealthInsurance();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,12 +46,13 @@ export class HealthInsuranceListComponent implements OnInit {
   }
  
   public redirectToDetails = (id: string) => {
-    let url: string = `/owner/details/${id}`;
+    let url: string = `../details/${id}`;
     this.router.navigate([url]);
   }
  
-  public redirectToUpdate = (id: string) => {
-    
+  public redirectToUpdate(id:number) {
+    let url: string = `app/health-insurance/edit/${id}`;
+    this.router.navigate([url]);
   }
  
   public redirectToDelete = (id: string) => {

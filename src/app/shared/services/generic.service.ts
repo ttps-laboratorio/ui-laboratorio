@@ -32,7 +32,7 @@ export abstract class GenericService<T> {
     return this.http.post<T>(this.baseUrl, object);
   }
 
-  update<T extends { id: any; }>(object: T): Observable<T> {
+  update<T extends { id?: number; }>(object: T): Observable<T> {
     return this.http.patch<T>(
       `${this.baseUrl}/${object.id}`, object
     );

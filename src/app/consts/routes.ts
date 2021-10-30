@@ -1,5 +1,5 @@
 export enum routes {
-  DASHBOARD = '/dashboard',
+  DASHBOARD = '/app',
   EMPLOYEE = '/employee',
   PATIENT = '/patient',
   STUDY = '/study',

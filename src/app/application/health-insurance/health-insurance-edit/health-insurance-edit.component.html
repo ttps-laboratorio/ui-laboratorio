@@ -1,0 +1,29 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="500px" fxFlex.xs="100%">
+        <mat-card-title>{{(selectedHealthInsurance.id!==undefined)?'Edit selected':'Create'}} Health Insurance
+        </mat-card-title>
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" [(ngModel)]="selectedHealthInsurance.name" class="field">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" [(ngModel)]="selectedHealthInsurance.email" class="field">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput type="text" [(ngModel)]="selectedHealthInsurance.phoneNumber" class="field">
+            </mat-form-field>
+            <mat-card-actions fxLayoutAlign="center center">
+                <button mat-flat-button color="primary"
+                    (click)="updateHealthInsurance()">{{(selectedHealthInsurance.id!==undefined)?'Update':'Create'}}</button>
+                <button mat-raised-button *ngIf="selectedHealthInsurance.id===undefined" color="basic" (click)="clearHealthInsurance()">Clear</button>
+                <a [routerLink]="['/app/health-insurance/list']" mat-raised-button color="accent">Back</a>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</section>
+<div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
