@@ -4,7 +4,7 @@
       <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
     <div>
-      <a [routerLink]="['']" mat-button color="primary">Create Health Insurance</a>
+      <a [routerLink]="['']" mat-raised-button color="primary">Create Health Insurance</a>
     </div>
   </div>
   <table mat-table [dataSource]="dataSource" matSort matSortStart="desc" (matSortChange)="customSort($event)">
@@ -53,6 +53,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
    </mat-paginator>
   
