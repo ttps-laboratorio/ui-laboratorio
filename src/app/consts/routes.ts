@@ -1,6 +1,6 @@
 export enum routes {
   DASHBOARD = '/app',
-  EMPLOYEE = '/employee',
+  EMPLOYEE = 'employee',
   PATIENT = '/patient',
   STUDY = '/study',
   HEALTH_INSURANCE = 'health-insurance',
