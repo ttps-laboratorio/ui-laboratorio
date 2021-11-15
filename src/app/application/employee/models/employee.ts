@@ -5,4 +5,8 @@ export class Employee {
   firstName: string;
   lastName: string;
   user?: User;
+
+  constructor() {
+    this.user = new User();
+  }
 }
