@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'health-insurance', loadChildren: () => import('./health-insurance/health-insurance.module').then(m => m.HealthInsuranceModule)},
+    { path: 'doctor', loadChildren: () => import('./referring-doctor/referring-doctor.module').then(m => m.ReferringDoctorModule)},
     // { path: 'home', loadChildren: '../home/home.module#HomeModule' },
     // { path: 'about', loadChildren: '../about/about.module#AboutModule' }
   ]}

@@ -1,0 +1,62 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+
+    <mat-card fxFlex="500px" fxFlex.xs="100%">
+        <mat-card-title>{{(selectedReferringDoctor.id!==undefined)?'Edit selected':'Create'}} Referring Doctor
+        </mat-card-title>
+        <form [formGroup]="referringDoctorForm" autocomplete="off" novalidate (ngSubmit)="updateReferringDoctor()">
+            <mat-card-content>
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" formControlName="firstName" [(ngModel)]="selectedReferringDoctor.firstName"
+                        class="field">
+                    <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+                    <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
+                    <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 60 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" formControlName="lastName" [(ngModel)]="selectedReferringDoctor.lastName"
+                        class="field">
+                    <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+                    <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
+                    <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 60 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>License Number</mat-label>
+                    <input matInput type="text" formControlName="licenseNumber" [(ngModel)]="selectedReferringDoctor.licenseNumber"
+                        class="field">
+                    <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+                    <mat-error *ngIf="hasError('licenseNumber', 'required')">License Number is required</mat-error>
+                    <mat-error *ngIf="hasError('licenseNumber', 'maxlength')">You have more than 60 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" formControlName="email" [(ngModel)]="selectedReferringDoctor.email"
+                        class="field">
+                    <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+                    <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+                    <mat-error *ngIf="hasError('email', 'email')">Invalid email address</mat-error>
+                    <mat-error *ngIf="hasError('email', 'maxlength')">You have more than 100 characters</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Phone</mat-label>
+                    <input matInput type="text" formControlName="phoneNumber"
+                        [(ngModel)]="selectedReferringDoctor.phoneNumber" class="field">
+                    <mat-hint align="end">Not more then 12 characters long.</mat-hint>
+                    <mat-error *ngIf="hasError('phoneNumber', 'required')">Phone is required</mat-error>
+                    <mat-error *ngIf="hasError('phoneNumber', 'maxlength')">You have more than 12 characters</mat-error>
+                </mat-form-field>
+                <mat-card-actions fxLayoutAlign="center center">
+                    <button type="submit" mat-flat-button [disabled]="!referringDoctorForm.valid"
+                        color="primary">{{(selectedReferringDoctor.id!==undefined)?'Update':'Create'}}</button>
+                    <button mat-raised-button *ngIf="selectedReferringDoctor.id===undefined" color="basic"
+                        (click)="clearReferringDoctor()">Clear</button>
+                    <a [routerLink]="['/app/doctor/list']" mat-raised-button color="accent">Back</a>
+                </mat-card-actions>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</section>
+<div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>

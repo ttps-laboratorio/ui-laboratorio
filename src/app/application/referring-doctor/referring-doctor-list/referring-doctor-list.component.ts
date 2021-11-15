@@ -4,32 +4,32 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-import { HealthInsurance } from '../models/health-insurance';
-import { HealthInsuranceService } from '../services/health-insurance.service';
+import { ReferringDoctor } from '../models/referring-doctor';
+import { ReferringDoctorService } from '../services/referring-doctor.service';
 
 @Component({
-  selector: 'app-health-insurance-list',
-  templateUrl: './health-insurance-list.component.html',
-  styleUrls: ['./health-insurance-list.component.scss']
+  selector: 'app-referring-doctor-list',
+  templateUrl: './referring-doctor-list.component.html',
+  styleUrls: ['./referring-doctor-list.component.scss']
 })
-export class HealthInsuranceListComponent implements OnInit {
+export class ReferringDoctorListComponent implements OnInit {
 
-  public displayedColumns = ['name', 'email', 'phone', 'details', 'update'];
-  public dataSource = new MatTableDataSource<HealthInsurance>();
+  public displayedColumns = ['firstName', 'lastName', 'licenseNumber', 'email', 'phoneNumber', 'details', 'update'];
+  public dataSource = new MatTableDataSource<ReferringDoctor>();
 
-  public selectedHealthInsurance = new HealthInsurance();
+  public selectedReferringDoctor = new ReferringDoctor();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
  
-  constructor(private healthInsuranceService: HealthInsuranceService, private errorService: ErrorHandlerService, private router: Router) { }
+  constructor(private referringDoctorService: ReferringDoctorService, private errorService: ErrorHandlerService, private router: Router) { }
  
   ngOnInit() {
     this.getAllHealthInsurances();
   }
  
   public getAllHealthInsurances = () => {
-    this.healthInsuranceService.getAll().subscribe((data) => this.dataSource.data=data);
+    this.referringDoctorService.getAll().subscribe((data) => this.dataSource.data=data);
   }
 
   ngAfterViewInit(): void {
@@ -51,7 +51,7 @@ export class HealthInsuranceListComponent implements OnInit {
   }
  
   public redirectToUpdate(id:number) {
-    let url: string = `app/health-insurance/edit/${id}`;
+    let url: string = `app/doctor/edit/${id}`;
     this.router.navigate([url]);
   }
  
