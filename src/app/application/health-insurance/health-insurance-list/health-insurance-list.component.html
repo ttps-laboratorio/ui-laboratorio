@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Health Insurances</mat-card-title>
+  <mat-card-title>Obras Sociales</mat-card-title>
   <mat-card-content>
     <div fxLayout fxLayout.lt-md="column wrap" fxLayoutAlign="center center" fxLayoutGap.gt-sm="250px"
       fxLayoutGap.lt.md="20px" style="margin-top: 1em;">
@@ -8,12 +8,12 @@
         <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
       <div>
-        <a [routerLink]="['../create']" mat-raised-button color="primary">Create Health Insurance</a>
+        <a [routerLink]="['../create']" mat-raised-button color="primary">Nueva Obra Social</a>
       </div>
     </div>
     <table mat-table [dataSource]="dataSource" matSort matSortStart="desc" (matSortChange)="customSort($event)">
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
@@ -23,7 +23,7 @@
       </ng-container>
 
       <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Número de teléfono</th>
         <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
       </ng-container>
 

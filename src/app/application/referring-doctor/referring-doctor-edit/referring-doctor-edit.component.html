@@ -51,7 +51,7 @@
                         color="primary">{{(selectedReferringDoctor.id!==undefined)?'Update':'Create'}}</button>
                     <button mat-raised-button *ngIf="selectedReferringDoctor.id===undefined" color="basic"
                         (click)="clearReferringDoctor()">Clear</button>
-                    <a [routerLink]="['/app/doctor/list']" mat-raised-button color="accent">Back</a>
+                    <a [routerLink]="['/app/doctor/list']" mat-raised-button color="accent">Volver</a>
                 </mat-card-actions>
             </mat-card-content>
         </form>

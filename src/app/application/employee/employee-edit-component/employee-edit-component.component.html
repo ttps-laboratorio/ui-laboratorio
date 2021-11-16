@@ -48,7 +48,7 @@
                         color="primary">{{(selectedEmployee.id!==undefined)?'Editar':'Crear'}}</button>
                     <button mat-raised-button *ngIf="selectedEmployee.id===undefined" color="basic"
                         (click)="clearEmployee()">Clear</button>
-                    <a [routerLink]="['/app/employee/list']" mat-raised-button color="accent">Back</a>
+                    <a [routerLink]="['/app/employee/list']" mat-raised-button color="accent">Volver</a>
                 </mat-card-actions>
             </mat-card-content>
         </form>
