@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SuccessDialogComponent } from 'src/app/shared/dialogs/success-dialog/success-dialog.component';
+import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { HealthInsurance } from '../../health-insurance/models/health-insurance';
 import { Employee } from '../models/employee';
 import { EmployeeService } from '../services/employee.service';
@@ -19,7 +20,7 @@ export class EmployeeEditComponentComponent implements OnInit {
   private dialogConfig: MatDialogConfig;
   loading = false;
 
-  constructor(private router: Router, private employeeService: EmployeeService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private errorService:ErrorHandlerService, private employeeService: EmployeeService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getEmployee();
@@ -31,7 +32,7 @@ export class EmployeeEditComponentComponent implements OnInit {
       email: new FormControl(this.selectedEmployee.user.email, [Validators.required, Validators.email, Validators.maxLength(60)]),
     });
     this.dialogConfig = {
-      height: '250px',
+      height: '300px',
       width: '400px',
       disableClose: true,
       data: {}
@@ -55,7 +56,10 @@ export class EmployeeEditComponentComponent implements OnInit {
           .subscribe(result => {
             this.router.navigate(['/app/employee/list']);
           });
-      });
+      }, (error => {
+        this.errorService.dialogConfig = { ...this.dialogConfig };
+        this.errorService.handleError(error);
+      }));
     } else {
       this.employeeService.create(this.selectedEmployee).subscribe((data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
@@ -63,7 +67,10 @@ export class EmployeeEditComponentComponent implements OnInit {
           .subscribe(result => {
             this.router.navigate(['/app/employee/list']);
           });
-      });
+      }, (error => {
+        this.errorService.dialogConfig = { ...this.dialogConfig };
+        this.errorService.handleError(error);
+      }));
     }
   }
 

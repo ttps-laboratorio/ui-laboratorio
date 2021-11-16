@@ -25,6 +25,11 @@ export class AuthInterceptor implements HttpInterceptor {
       if (error instanceof HttpErrorResponse && error.status === 401 && !request.url.endsWith('/refresh-token')) {
         return this.handle401Error(request, next);
       } else {
+        //return throwError(error);
+        if (error instanceof HttpErrorResponse && error.status === 400){
+          throwError(error);
+          //return throwError(new Error(error.error));
+        }
         return throwError(error);
       }
     }));

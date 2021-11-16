@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SuccessDialogComponent } from 'src/app/shared/dialogs/success-dialog/success-dialog.component';
+import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { ReferringDoctor } from '../models/referring-doctor';
 import { ReferringDoctorService } from '../services/referring-doctor.service';
 
@@ -18,7 +19,7 @@ export class ReferringDoctorEditComponent implements OnInit {
   private dialogConfig: MatDialogConfig;
   loading = false;
 
-  constructor(private router: Router, private referringDoctorService: ReferringDoctorService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private errorService:ErrorHandlerService, private referringDoctorService: ReferringDoctorService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getReferringDoctor();
@@ -30,7 +31,7 @@ export class ReferringDoctorEditComponent implements OnInit {
       phoneNumber: new FormControl(this.selectedReferringDoctor.phoneNumber, [Validators.required, Validators.maxLength(12)])
     });
     this.dialogConfig = {
-      height: '250px',
+      height: '300px',
       width: '400px',
       disableClose: true,
       data: {}
@@ -54,7 +55,10 @@ export class ReferringDoctorEditComponent implements OnInit {
           .subscribe(result => {
             this.router.navigate(['/app/doctor/list']);
           });
-      });
+      }, (error => {
+        this.errorService.dialogConfig = { ...this.dialogConfig };
+        this.errorService.handleError(error);
+      }));
     } else {
       this.referringDoctorService.create(this.selectedReferringDoctor).subscribe((data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
@@ -62,7 +66,10 @@ export class ReferringDoctorEditComponent implements OnInit {
           .subscribe(result => {
             this.router.navigate(['/app/doctor/list']);
           });
-      });
+      }, (error => {
+        this.errorService.dialogConfig = { ...this.dialogConfig };
+        this.errorService.handleError(error);
+      }));
     }
   }
 

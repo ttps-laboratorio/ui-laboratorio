@@ -42,6 +42,6 @@ export class ErrorHandlerService {
   }
  
   private createErrorMessage(error: HttpErrorResponse){
-    this.errorMessage = error.error ? error.error : error.statusText;
+    this.errorMessage = error.error.message ? error.error.message : error.statusText;
   }
 }
