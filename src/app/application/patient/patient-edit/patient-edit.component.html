@@ -57,7 +57,7 @@
                     <button type="submit" mat-flat-button [disabled]="!patientForm.valid"
                         color="primary">{{(selectedPatient.id!==undefined)?'Editar':'Crear'}}</button>
                     <button mat-raised-button *ngIf="selectedPatient.id===undefined" color="basic"
-                        (click)="clearPatient()">Clear</button>
+                        (click)="clearPatient()">Limpiar</button>
                     <a [routerLink]="['/app/patient/list']" mat-raised-button color="accent">Volver</a>
                 </mat-card-actions>
             </mat-card-content>

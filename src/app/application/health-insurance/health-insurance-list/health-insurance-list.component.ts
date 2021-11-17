@@ -14,7 +14,7 @@ import { HealthInsuranceService } from '../services/health-insurance.service';
 })
 export class HealthInsuranceListComponent implements OnInit {
 
-  public displayedColumns = ['name', 'email', 'phone', 'details', 'update'];
+  public displayedColumns = ['name', 'email', 'phone', 'update'];
   public dataSource = new MatTableDataSource<HealthInsurance>();
 
   public selectedHealthInsurance = new HealthInsurance();

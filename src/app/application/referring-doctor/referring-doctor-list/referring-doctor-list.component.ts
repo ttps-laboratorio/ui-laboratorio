@@ -14,7 +14,7 @@ import { ReferringDoctorService } from '../services/referring-doctor.service';
 })
 export class ReferringDoctorListComponent implements OnInit {
 
-  public displayedColumns = ['firstName', 'lastName', 'licenseNumber', 'email', 'phoneNumber', 'details', 'update'];
+  public displayedColumns = ['firstName', 'lastName', 'licenseNumber', 'email', 'phoneNumber', 'update'];
   public dataSource = new MatTableDataSource<ReferringDoctor>();
 
   public selectedReferringDoctor = new ReferringDoctor();

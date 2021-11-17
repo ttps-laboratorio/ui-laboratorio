@@ -14,7 +14,7 @@ import { EmployeeService } from '../services/employee.service';
 })
 export class EmployeeListComponentComponent implements OnInit {
 
-  public displayedColumns = ['firstName', 'lastName', 'email', 'username', 'details', 'update'];
+  public displayedColumns = ['firstName', 'lastName', 'email', 'username', 'update'];
   public dataSource = new MatTableDataSource<Employee>();
 
   @ViewChild(MatSort) sort: MatSort;

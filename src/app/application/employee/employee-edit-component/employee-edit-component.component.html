@@ -47,7 +47,7 @@
                     <button type="submit" mat-flat-button [disabled]="!employeeForm.valid"
                         color="primary">{{(selectedEmployee.id!==undefined)?'Editar':'Crear'}}</button>
                     <button mat-raised-button *ngIf="selectedEmployee.id===undefined" color="basic"
-                        (click)="clearEmployee()">Clear</button>
+                        (click)="clearEmployee()">Limpiar</button>
                     <a [routerLink]="['/app/employee/list']" mat-raised-button color="accent">Volver</a>
                 </mat-card-actions>
             </mat-card-content>
