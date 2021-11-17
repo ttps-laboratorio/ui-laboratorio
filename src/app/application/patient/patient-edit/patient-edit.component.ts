@@ -31,12 +31,14 @@ export class PatientEditComponent implements OnInit {
     this.patientForm = new FormGroup({
       firstName: new FormControl(this.selectedPatient.firstName, [Validators.required, Validators.maxLength(60)]),
       lastName: new FormControl(this.selectedPatient.lastName, [Validators.required, Validators.maxLength(60)]),
-      dni: new FormControl(this.selectedPatient.dni, [Validators.required, Validators.maxLength(60)]),
-      birthDate: new FormControl(this.selectedPatient.birthDate, [Validators.required, this.dateValidator()]),
+      dni: new FormControl(this.selectedPatient.dni, [Validators.required, Validators.maxLength(8)]),
+      birthDate: new FormControl(this.selectedPatient.birthDate, [Validators.required]),
       healthInsurance: new FormControl(this.selectedPatient.healthInsurance.id, [Validators.required]),
-      afiliateNumber: new FormControl(this.selectedPatient.afiliateNumber),
+      affiliateNumber: new FormControl(this.selectedPatient.affiliateNumber),
       clinicHistory: new FormControl(this.selectedPatient.clinicHistory, [Validators.required]),
-      
+      contactName: new FormControl(this.selectedPatient.contact.name, [Validators.required, Validators.maxLength(60)]),
+      contactEmail: new FormControl(this.selectedPatient.contact.email, [Validators.required, Validators.maxLength(60), Validators.email]),
+      contactPhone: new FormControl(this.selectedPatient.contact.phoneNumber, [Validators.required,  Validators.maxLength(12)]),
     });
     this.dialogConfig = {
       height: '300px',
@@ -49,7 +51,12 @@ export class PatientEditComponent implements OnInit {
   private getPatient(): void {
     let id: number = this.activeRoute.snapshot.params['id'];
     if (id !== undefined) {
-      this.patientService.get(id).subscribe((data) => this.selectedPatient = data);
+      this.patientService.get(id).subscribe((data) => {this.selectedPatient = data;
+        this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate);
+        // transform date to start of day
+        this.selectedPatient.birthDate.setTime( this.selectedPatient.birthDate.getTime() + this.selectedPatient.birthDate.getTimezoneOffset()*60*1000 );
+        console.log(this.selectedPatient.birthDate);
+      });
     }
   }
 
@@ -60,7 +67,7 @@ export class PatientEditComponent implements OnInit {
   updatePatient() {
     if (!this.patientForm.valid)
       return;
-    console.log(this.selectedPatient);
+   // this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate.getFullYear()+"-"+this.selectedPatient.birthDate.getMonth()+"-"+ this.selectedPatient.birthDate.getDate());
     if (this.selectedPatient.id !== undefined) {
       this.patientService.update(this.selectedPatient).subscribe((data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
@@ -98,21 +105,21 @@ export class PatientEditComponent implements OnInit {
     return this.patientForm.controls[controlName].hasError(errorName);
   }
 
-  public dateValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const today = new Date().getTime();
+  // public dateValidator(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } | null => {
+  //     const today = new Date().getTime();
 
-      if (!(control && control.value)) {
-        // if there's no control or no value, that's ok
-        return null;
-      }
+  //     if (!(control && control.value)) {
+  //       // if there's no control or no value, that's ok
+  //       return null;
+  //     }
 
-      // return null if there's no errors
-      return control.value.getTime() > today
-        ? { invalidDate: 'No se puede elegir una fecha posterior a hoy' }
-        : null;
-    }
-  }
+  //     // return null if there's no errors
+  //     return control.value.getTime() > today
+  //       ? { invalidDate: 'No se puede elegir una fecha posterior a hoy' }
+  //       : null;
+  //   }
+  //}
 
 
 }

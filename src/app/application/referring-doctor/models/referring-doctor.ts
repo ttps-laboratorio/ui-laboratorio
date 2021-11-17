@@ -4,5 +4,5 @@ export class ReferringDoctor {
   lastName: string;
   email: string;
   licenseNumber: string;
-  phoneNumber: number;
+  phoneNumber: string;
 }

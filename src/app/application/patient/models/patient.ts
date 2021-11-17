@@ -9,7 +9,7 @@ export class Patient {
     dni: number;
     contact?:Contact;
     healthInsurance?:HealthInsurance;
-    afiliateNumber:number;
+    affiliateNumber:string;
     clinicHistory:string;
 
     constructor() {

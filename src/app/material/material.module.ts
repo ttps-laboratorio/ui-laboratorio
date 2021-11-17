@@ -19,7 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
@@ -70,6 +70,9 @@ import { MatDialogModule} from '@angular/material/dialog';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule
-  ]
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
+  ],
 })
 export class MaterialModule { }
