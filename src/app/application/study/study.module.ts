@@ -6,6 +6,7 @@ import { StudyListComponent } from './study-list/study-list.component';
 import { StudyDetailsComponent } from './study-details/study-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StudyCreateComponent } from './study-create/study-create.component';
+import { PatientModule } from '../patient/patient.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { StudyCreateComponent } from './study-create/study-create.component';
   imports: [
     CommonModule,
     SharedModule,
-    StudyRoutingModule
+    StudyRoutingModule,
+    PatientModule,
   ]
 })
 export class StudyModule { }

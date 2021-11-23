@@ -1,1 +1,31 @@
-<p>study-create works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="800px" fxFlex.xs="100%">
+        <mat-card-title>Crear estudio</mat-card-title>
+        <mat-card-content>
+            <div *ngIf="selectedPatient.id === undefined">
+                <button mat-icon-button color="warn" (click)="openSearchPatientDialog()">
+                    <mat-icon class="mat-18">search</mat-icon> Buscar paciente
+                  </button>
+            </div>
+            <div *ngIf="selectedPatient.id !== undefined">
+                Crear estudio para el paciente: {{selectedPatient.dni}} {{selectedPatient.firstName}} {{selectedPatient.lastName}}
+            </div>
+            <form *ngIf="selectedPatient.id !== undefined" [formGroup]="studyForm" autocomplete="off" novalidate (ngSubmit)="createStudy()">
+                <mat-form-field appearance="fill" class="inline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" formControlName="firstName"
+                        class="field">
+                </mat-form-field>
+                <mat-card-actions fxLayoutAlign="center center">
+                    <button type="submit" mat-flat-button [disabled]="!studyForm.valid"
+                        color="primary">Crear estudio</button>
+                    <a [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver</a>
+                </mat-card-actions>
+            </form>
+            </mat-card-content>
+    </mat-card>
+
+</section>
+<div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>

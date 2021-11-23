@@ -1,0 +1,28 @@
+mat-form-field {
+    display: block;
+    width: 100%;
+}
+
+mat-form-field.inline {
+    display: inline-block;
+    width: 45%;
+    margin: 0em 0.5em 0em 1em;
+}
+
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+}
+ 
+th.mat-header-cell {
+    text-align: left;
+    max-width: 300px;
+}
+tr:hover {
+    cursor: pointer;
+}
+.selected-row {
+    background-color: rgb(189, 148, 255);
+}
