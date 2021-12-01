@@ -21,11 +21,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MatStepperModule,
+    MatAutocompleteModule,
     MatTabsModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -49,6 +53,8 @@ import { MatDialogModule} from '@angular/material/dialog';
     MatDialogModule
   ],
   exports: [
+    MatStepperModule,
+    MatAutocompleteModule,
     MatTabsModule,
     MatSidenavModule,
     MatToolbarModule,

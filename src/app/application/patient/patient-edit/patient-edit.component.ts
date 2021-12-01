@@ -55,7 +55,6 @@ export class PatientEditComponent implements OnInit {
         this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate);
         // transform date to start of day
         this.selectedPatient.birthDate.setTime( this.selectedPatient.birthDate.getTime() + this.selectedPatient.birthDate.getTimezoneOffset()*60*1000 );
-        console.log(this.selectedPatient.birthDate);
       });
     }
   }

@@ -2,27 +2,69 @@
     <mat-card fxFlex="800px" fxFlex.xs="100%">
         <mat-card-title>Crear estudio</mat-card-title>
         <mat-card-content>
-            <div *ngIf="selectedPatient.id === undefined">
-                <button mat-icon-button color="warn" (click)="openSearchPatientDialog()">
-                    <mat-icon class="mat-18">search</mat-icon> Buscar paciente
-                  </button>
-            </div>
-            <div *ngIf="selectedPatient.id !== undefined">
-                Crear estudio para el paciente: {{selectedPatient.dni}} {{selectedPatient.firstName}} {{selectedPatient.lastName}}
-            </div>
-            <form *ngIf="selectedPatient.id !== undefined" [formGroup]="studyForm" autocomplete="off" novalidate (ngSubmit)="createStudy()">
-                <mat-form-field appearance="fill" class="inline">
-                    <mat-label>Nombre</mat-label>
-                    <input matInput type="text" formControlName="firstName"
-                        class="field">
-                </mat-form-field>
-                <mat-card-actions fxLayoutAlign="center center">
-                    <button type="submit" mat-flat-button [disabled]="!studyForm.valid"
-                        color="primary">Crear estudio</button>
-                    <a [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver</a>
-                </mat-card-actions>
-            </form>
-            </mat-card-content>
+            <mat-vertical-stepper linear #stepper>
+                <mat-step [stepControl]="selectedPatient.id !== undefined" >
+                    <ng-template matStepLabel>Buscar paciente</ng-template>
+                    <!-- <div *ngIf="selectedPatient.id === undefined"> -->
+                    <div>
+                        <button mat-icon-button color="warn" (click)="openSearchPatientDialog()">
+                            <mat-icon class="mat-18">search</mat-icon> Buscar paciente
+                        </button>
+                    </div>
+                    <div>
+                        <!-- <div *ngIf="selectedPatient.id !== undefined"> -->
+                        Crear estudio para el paciente: {{selectedPatient.dni}} {{selectedPatient.firstName}}
+                        {{selectedPatient.lastName}}
+                    </div>
+                    <div>
+                        <button mat-button matStepperNext>Siguiente</button>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="studyForm">
+                    <ng-template matStepLabel>Cargar estudio</ng-template>
+                    <form *ngIf="selectedPatient.id !== undefined" [formGroup]="studyForm" autocomplete="off" novalidate
+                        (ngSubmit)="createStudy()">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Tipo de estudio</mat-label>
+                            <mat-select formControlName="studyType" [(ngModel)]="study.studyType.id">
+                              <mat-option *ngFor="let studyType of studyTypeList" [value]="studyType.id">
+                                {{studyType.name}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Diagnóstico presuntivo</mat-label>
+                            <mat-select formControlName="presumptiveDiagnosis" [(ngModel)]="study.presumptiveDiagnosis.id">
+                              <mat-option *ngFor="let presumptiveDiagnosis of presumptiveDiagnosisList" [value]="presumptiveDiagnosis.id">
+                                {{presumptiveDiagnosis.description}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Presupuesto</mat-label>
+                            <input matInput type="text" placeholder="XXXX.XX" maxlength="16" formControlName="budget" [(ngModel)]="study.budget" class="field" (keypress)="decimalFilter($event)">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Monto de extracción</mat-label>
+                            <input matInput placeholder="XXXX.XX" type="text" maxlength="16" formControlName="extractionAmount" [(ngModel)]="study.extractionAmount" class="field" (keypress)="decimalFilter($event)">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Médico derivante</mat-label>
+                            <mat-select formControlName="referringDoctor" [(ngModel)]="study.referringDoctor.id">
+                              <mat-option *ngFor="let referringDoctor of referringDoctorList" [value]="referringDoctor.id">
+                                {{referringDoctor.lastName}}, {{referringDoctor.firstName}} 
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-card-actions fxLayoutAlign="center center">
+                            <button type="submit" mat-flat-button [disabled]="!studyForm.valid" color="primary">Crear
+                                estudio</button>
+                            <a [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver</a>
+                        </mat-card-actions>
+                    </form>
+                </mat-step>
+            </mat-vertical-stepper>
+        </mat-card-content>
     </mat-card>
 
 </section>

@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-import { Study } from '../models/study';
+import { StudyItem } from '../models/study-item';
 import { StudyService } from '../services/study.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { StudyService } from '../services/study.service';
 export class StudyListComponent implements OnInit {
 
   public displayedColumns = ['patient', 'creationDate', 'studyType', 'details'];
-  public dataSource = new MatTableDataSource<Study>();
+  public dataSource = new MatTableDataSource<StudyItem>();
 
 
   @ViewChild(MatSort) sort: MatSort;
@@ -28,7 +28,7 @@ export class StudyListComponent implements OnInit {
   }
  
   public getAllStudies = () => {
-    this.studyService.getAll().subscribe((data) => this.dataSource.data=data);
+    this.studyService.getAllItem().subscribe((data) => this.dataSource.data=data);
   }
 
   ngAfterViewInit(): void {

@@ -61,6 +61,6 @@ export class PatientSearchComponent implements OnInit {
     this.matDialogRef.close(this.selectedPatient);
   }
   public close(): void{
-    this.matDialogRef.close();
+    this.matDialogRef.close(new Patient());
   }
 }

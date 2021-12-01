@@ -3,9 +3,11 @@ import { ReferringDoctor } from "../../referring-doctor/models/referring-doctor"
 import { PresumptiveDiagnosis } from "./presumptive-diagnosis";
 import { StudyType } from "./study-type";
 
-export class Study {
+export class StudyItem {
     id?:number;
-    patient: Patient;
+    createdAt:Date;
+    firstName:string;
+    lastName:string;
     budget: number;
     extractionAmount: number;
     referringDoctor: ReferringDoctor;
@@ -13,7 +15,6 @@ export class Study {
     presumptiveDiagnosis: PresumptiveDiagnosis;
 
     constructor(){
-        this.patient = new Patient();
         this.referringDoctor = new ReferringDoctor();
         this.studyType = new StudyType();
         this.presumptiveDiagnosis = new PresumptiveDiagnosis();
