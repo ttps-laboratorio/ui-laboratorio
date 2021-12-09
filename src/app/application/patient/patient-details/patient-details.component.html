@@ -1,1 +1,114 @@
-<p>patient-details works!</p>
+<!-- <p>patient-details works!</p> -->
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="800px" fxFlex.xs="100%">
+        <mat-card-title> Visualizar paciente </mat-card-title>
+            <form [formGroup]="patientForm" >
+                <mat-card-content>
+                    <div class="container row mt-3">
+                        <mat-card-subtitle>Datos del paciente</mat-card-subtitle>
+                            
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput type="text" formControlName="firstName" [(ngModel)]="selectedPatient.firstName"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Apellido</mat-label>
+                                <input matInput type="text" formControlName="lastName" [(ngModel)]="selectedPatient.lastName"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="container row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Número de documento</mat-label>
+                                <input matInput type="text" formControlName="dni" [(ngModel)]="selectedPatient.dni"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input matInput type="date" formControlName="birthDate" [(ngModel)]="selectedPatient.birthDate"
+                                [readonly]="true" class="field" [value]="selectedPatient.birthDate">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="container row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Obra Social</mat-label>
+                                <input matInput formControlName="healthInsurance" [(ngModel)]="selectedPatient.healthInsurance.name"
+                                [readonly]="true" class="field" [value]="selectedPatient.healthInsurance.name">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Número de afiliado</mat-label>
+                                <input matInput type="text" formControlName="affiliateNumber" [(ngModel)]="selectedPatient.affiliateNumber"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="container row">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Historia clínica</mat-label>
+                            <textarea matInput  formControlName="clinicHistory" [(ngModel)]="selectedPatient.clinicHistory"
+                            [readonly]="true" class="field"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-card-subtitle>Datos de contacto</mat-card-subtitle>
+                    <div class="container row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput type="text" formControlName="contactName" [(ngModel)]="selectedPatient.contact.name"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput type="text" formControlName="contactEmail" [(ngModel)]="selectedPatient.contact.email"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Teléfono</mat-label>
+                                <input matInput type="text" formControlName="contactPhone" [(ngModel)]="selectedPatient.contact.phoneNumber"
+                                [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <mat-card-actions fxLayoutAlign="center center">
+                        <button  mat-flat-button color="primary" (click)="redirectToUpdate(selectedPatient.id)">Editar</button>
+                        <a [routerLink]="['/app/patient/list']" mat-raised-button color="accent">Volver</a>
+                    </mat-card-actions>
+                    
+
+                </mat-card-content>
+            </form>
+    </mat-card>
+    <!-- <mat-card fxFlex="800px" fxFlex.xs="100%">
+        <mat-card-title>Visualizar paciente </mat-card-title>
+        <mat-card-content>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="text" formControlName="firstName" [(ngModel)]="selectedPatient.firstName"
+                    [readonly]="true" class="form-control">
+                </div>
+
+            </div>
+
+        </mat-card-content>
+    </mat-card> -->
+</section>

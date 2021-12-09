@@ -1,0 +1,10 @@
+mat-form-field {
+    display: block;
+    width: 100%;
+}
+
+mat-form-field.inline {
+    display: inline-block;
+    width: 45%;
+    margin: 0em 0.5em 0em 1em;
+}
