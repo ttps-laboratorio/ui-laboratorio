@@ -9,3 +9,14 @@ th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
+
+mat-form-field {
+    display: block;
+    width: 100%;
+}
+
+mat-form-field.inline {
+    display: inline-block;
+    width: 45%;
+    margin: 0em 0.5em 0em 1em;
+}

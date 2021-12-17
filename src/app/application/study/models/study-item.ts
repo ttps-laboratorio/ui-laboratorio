@@ -10,12 +10,10 @@ export class StudyItem {
     lastName:string;
     budget: number;
     extractionAmount: number;
-    referringDoctor: ReferringDoctor;
     studyType: StudyType;
     presumptiveDiagnosis: PresumptiveDiagnosis;
 
     constructor(){
-        this.referringDoctor = new ReferringDoctor();
         this.studyType = new StudyType();
         this.presumptiveDiagnosis = new PresumptiveDiagnosis();
         this.budget = 0.0;
