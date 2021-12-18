@@ -19,15 +19,12 @@ export class PatientDetailsComponent implements OnInit {
 
   public patientForm: FormGroup;
   public selectedPatient: Patient = new Patient();
-  private dialogConfig: MatDialogConfig;
-  public healthInsurances: Array<HealthInsurance> = new Array<HealthInsurance>();
   loading = false;
 
-  constructor(private router: Router, private errorService: ErrorHandlerService, private patientService: PatientService, private healthInsuranceService: HealthInsuranceService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private patientService: PatientService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getPatient();
-    this.getHealthInsurances();
     this.patientForm = new FormGroup({
       firstName: new FormControl(this.selectedPatient.firstName, [Validators.required, Validators.maxLength(60)]),
       lastName: new FormControl(this.selectedPatient.lastName, [Validators.required, Validators.maxLength(60)]),
@@ -40,12 +37,6 @@ export class PatientDetailsComponent implements OnInit {
       contactEmail: new FormControl(this.selectedPatient.contact.email, [Validators.required, Validators.maxLength(60), Validators.email]),
       contactPhone: new FormControl(this.selectedPatient.contact.phoneNumber, [Validators.required,  Validators.maxLength(12)]),
     });
-    this.dialogConfig = {
-      height: '300px',
-      width: '400px',
-      disableClose: true,
-      data: {}
-    }
   }
 
   private getPatient(): void {
@@ -55,13 +46,8 @@ export class PatientDetailsComponent implements OnInit {
         this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate);
         // transform date to start of day
         this.selectedPatient.birthDate.setTime( this.selectedPatient.birthDate.getTime() + this.selectedPatient.birthDate.getTimezoneOffset()*60*1000 );
-        console.log(this.selectedPatient.birthDate);
       });
     }
-  }
-
-  private getHealthInsurances(): void {
-    this.healthInsuranceService.getAll().subscribe((data) => this.healthInsurances = data);
   }
 
   public redirectToUpdate(id:number) {
