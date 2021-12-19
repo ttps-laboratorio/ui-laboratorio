@@ -6,6 +6,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SuccessDialogComponent } from 'src/app/shared/dialogs/success-dialog/success-dialog.component';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { StudyService } from '../services/study.service';
+import { Patient } from '../../patient/models/patient';
+import { PatientService } from '../../patient/services/patient.service';
+import { Extractionist } from '../models/extractionist';
+import { ExtractionistService } from '../services/extractionist.service';
 
 
 @Component({
@@ -18,16 +22,20 @@ export class StudyCreateComponent implements OnInit {
   public studyForm: FormGroup;
   public selectedStudy: Study = new Study();
   private dialogConfig: MatDialogConfig;
+  public patients: Array<Patient> = new Array<Patient>();
+  public extractionists: Array<Extractionist> = new Array<Extractionist>();
 
-  constructor(private router: Router, private errorService: ErrorHandlerService, private studyService: StudyService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private errorService: ErrorHandlerService,  private patientService: PatientService, private extractionistService: ExtractionistService, private studyService: StudyService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getStudy();
+    this.getAllPatients();
+    this.getExtractionists();
     this.studyForm = new FormGroup({
       budget: new FormControl(this.selectedStudy.budget, [Validators.required]),
       createdAt: new FormControl(this.selectedStudy.createdAt, [Validators.required]),
       extractionAmount: new FormControl(this.selectedStudy.extractionAmount, [Validators.required]),
-      delay: new FormControl(this.selectedStudy.delay, [Validators.required]),
+      delay: new FormControl(this.selectedStudy.delay),
       paidExtractionAmount: new FormControl(this.selectedStudy.paidExtractionAmount, [Validators.required]),
       appointment: new FormControl(this.selectedStudy.appointment.id, [Validators.required]),
       extractionist: new FormControl(this.selectedStudy.extractionist.id, [Validators.required]),
@@ -44,6 +52,13 @@ export class StudyCreateComponent implements OnInit {
     };
   }
 
+  private getAllPatients(): void {
+    this.patientService.getAll().subscribe((data) => this.patients = data);
+  }
+  private getExtractionists(): void {
+    this.extractionistService.getAll().subscribe((data) => this.extractionists = data);
+  }
+
 
   private getStudy(): void {
     let id: number = this.activeRoute.snapshot.params['id'];
@@ -53,18 +68,19 @@ export class StudyCreateComponent implements OnInit {
         this.selectedStudy.createdAt.setTime( this.selectedStudy.createdAt.getTime() + this.selectedStudy.createdAt.getTimezoneOffset()*60*1000 );
       });
     }
+    // else {
+    
   }
 
-  updatePatient() {
+  updateStudy() {
     if (!this.studyForm.valid)
       return;
-   // this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate.getFullYear()+"-"+this.selectedPatient.birthDate.getMonth()+"-"+ this.selectedPatient.birthDate.getDate());
     if (this.selectedStudy.id !== undefined) {
       this.studyService.update(this.selectedStudy).subscribe((data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
         dialogRef.afterClosed()
           .subscribe(result => {
-            this.router.navigate(['/app/patient/list']);
+            this.router.navigate(['/app/study/list']);
           });
       }, (error => {
         this.errorService.dialogConfig = { ...this.dialogConfig };
@@ -88,7 +104,7 @@ export class StudyCreateComponent implements OnInit {
     this.selectedStudy = selectedStudy;
   }
 
-  clearPatient() {
+  clearStudy() {
     this.selectedStudy = new Study();
   }
 

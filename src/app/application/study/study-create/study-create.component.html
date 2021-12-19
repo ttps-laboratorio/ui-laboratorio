@@ -1,1 +1,47 @@
-<p>study-create works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="800px" fxFlex.xs="100%">
+        <mat-card-title>{{(selectedStudy.id!==undefined)?'Editar':'Crear nuevo'}} estudio
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="studyForm" >
+                <div class="container row mt-3">
+                    <mat-card-subtitle>Datos del estudio</mat-card-subtitle>
+                        
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Presupuesto</mat-label>
+                            <input matInput type="text" formControlName="budget" [(ngModel)]="selectedStudy.budget"
+                            [readonly]="true" class="field">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Monto de la extracción</mat-label>
+                            <input matInput type="text" formControlName="lastName" [(ngModel)]="selectedStudy.extractionAmount"
+                            class="field">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- <div class="container row">
+                    <div class="col-md-6">
+                        <mat-label>Obra Social</mat-label>
+                        <mat-select formControlName="extractionist" [(ngModel)]="selectedStudy.extractionist.id">
+                            <mat-option *ngFor="let extractionist of extractionists" [value]="extractionist.id">
+                            {{extractionist.fullName}}
+                            </mat-option>
+                        </mat-select>
+                    </div>-->
+                    <!-- <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Monto de la extracción</mat-label>
+                            <input matInput type="text" formControlName="lastName" [(ngModel)]="selectedStudy.extractionAmount"
+                            class="field">
+                        </mat-form-field>
+                    </div> -->
+                <!-- </div>  -->
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+</section>
