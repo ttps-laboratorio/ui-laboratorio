@@ -1,4 +1,3 @@
-<!-- <p>patient-details works!</p> -->
 <section fxLayout="row wrap" fxLayoutAlign="center center">
     <mat-card fxFlex="800px" fxFlex.xs="100%">
         <mat-card-title> Visualizar paciente </mat-card-title>
@@ -33,7 +32,7 @@
                         <div class="col-md-6">
                             <mat-form-field appearance="outline">
                                 <mat-label>Fecha de nacimiento</mat-label>
-                                <input matInput type="text" formControlName="birthDate" [ngModel]="selectedPatient.birthDate | date: 'dd/MM/yyyy'" (ngModelChange)="selectedPatient.birthDate=$event"
+                                <input matInput type="text" formControlName="birthDate" [ngModel]="selectedPatient.birthDate | date: 'yyyy/MM/dd'" (ngModelChange)="selectedPatient.birthDate=$event"
                                 [readonly]="true" class="field">
                             </mat-form-field>
                         </div>

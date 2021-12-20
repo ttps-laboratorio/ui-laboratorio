@@ -1,1 +1,114 @@
-<p>study-details works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="100%" fxFlex.xs="100%">
+        <mat-card-title> Estudio #{{study.id}} </mat-card-title>
+        <form>
+            <mat-card-content>
+                <div class="container flex-row">
+                    <mat-card-subtitle *ngIf="!user.isPatient()">Paciente</mat-card-subtitle>
+                    <div class="row" *ngIf="!user.isPatient()">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput type="text" [value]="study.patient.firstName" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Apellido</mat-label>
+                                <input matInput type="text" [value]="study.patient.lastName" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input matInput type="text" [value]="study.patient.birthDate | date: 'dd/MM/yyyy'"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Número de documento</mat-label>
+                                <input matInput type="text" [value]="study.patient.dni" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-card-subtitle style="margin-top: 1em;">Estudio</mat-card-subtitle>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Fecha de alta</mat-label>
+                                <input matInput type="text" [value]="study.createdAt | date: 'dd/MM/yyyy'"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Tipo de estudio</mat-label>
+                                <input matInput type="text" [value]="study.type.name" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Diagnóstico presuntivo</mat-label>
+                                <input matInput type="text" [value]="study.presumptiveDiagnosis.description" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Médico derivante</mat-label>
+                                <input matInput type="text" [value]="study.referringDoctor.firstName +' '+study.referringDoctor.lastName" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Presupuesto</mat-label>
+                                <input matInput type="text" [value]="study.budget" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Monto de extracción</mat-label>
+                                <input matInput type="text" [value]="study.extractionAmount" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Extracción abonada </mat-label>
+                                <input matInput type="text" [value]="(study.paidExtractionAmount)?'Sí':'No'" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6" *ngIf="user.isPatient()">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Estado actual </mat-label>
+                                <input matInput type="text" [value]="(study.actualStatus.id > 6 && study.actualStatus.id < 12)?'Esperando resultado':study.actualStatus.name" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6" *ngIf="!user.isPatient()">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Estado actual </mat-label>
+                                <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                    </div>
+                </div>
+
+                <mat-card-actions fxLayoutAlign="center center">
+                    <!-- <button  mat-flat-button color="primary" (click)="redirectToUpdate(study.id)">Editar</button> -->
+                    <a [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver listado</a>
+                </mat-card-actions>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</section>
