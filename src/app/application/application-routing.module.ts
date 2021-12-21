@@ -13,6 +13,9 @@ const routes: Routes = [
     { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)},
     { path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)},
     { path: 'study', loadChildren: () => import('./study/study.module').then(m => m.StudyModule)},
+    { path: 'graph', loadChildren: () => import('./graphs/graphs.module').then(m => m.GraphsModule)},
+
+    
     // { path: 'home', loadChildren: '../home/home.module#HomeModule' },
     // { path: 'about', loadChildren: '../about/about.module#AboutModule' }
   ]}

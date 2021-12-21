@@ -5,6 +5,7 @@ import { StudyCreateComponent } from './study-create/study-create.component';
 import { StudyDetailsComponent } from './study-details/study-details.component';
 import { StudyListComponent } from './study-list/study-list.component';
 
+
 const routes: Routes = [
   {
     path: '', canActivate: [AuthGuard], data: { permissions: ['ROLE_EMPLOYEE'] }, children: [
