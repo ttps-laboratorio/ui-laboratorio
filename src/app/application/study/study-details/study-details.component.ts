@@ -84,6 +84,14 @@ export class StudyDetailsComponent implements OnInit {
     });
   }
 
+  public downloadFinalReport(): void {
+    this.studyService.downloadFinalReport(this.study.id).subscribe((data: Blob) => {
+      const file = new Blob([data], { type: 'application/pdf' });
+      const fileURL = URL.createObjectURL(file);
+      saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_final_report.pdf');
+    });
+  }
+
   public cancelarTurno(): void {
 
   }

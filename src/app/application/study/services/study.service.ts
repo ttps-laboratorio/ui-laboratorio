@@ -56,6 +56,10 @@ export class StudyService extends GenericService<Study> {
     return this.http.get(`${this.baseUrl}/${id}/signed-consent`, { responseType: 'blob' });
   }
 
+  public downloadFinalReport(id: number): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/${id}/final-report`, { responseType: 'blob' });
+  }
+
   public createAppointment(id: number, appointment: Appointment): Observable<any> {
     return this.http.post(`${this.baseUrl}/${id}/appointment`, appointment);
   }

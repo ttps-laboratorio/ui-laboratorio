@@ -149,6 +149,12 @@
                                 consentimiento informado firmado</button>
                         </div>
                     </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id >= 10">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadFinalReport()">Descargar
+                                inform final</button>
+                        </div>
+                    </div>
 
                     <mat-card-subtitle style="margin-top: 1.5em;">Workflow</mat-card-subtitle>
                     <div class="row mt-1">
