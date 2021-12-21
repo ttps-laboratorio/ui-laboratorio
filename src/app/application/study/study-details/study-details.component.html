@@ -150,6 +150,9 @@
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 6 && user.isEmployee()">
                             <app-add-sample [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-add-sample>
                         </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 7 && user.isEmployee()">
+                            <app-add-extractionist [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-add-extractionist>
+                        </div>
                     </div>
 
                 </div>

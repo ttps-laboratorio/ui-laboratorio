@@ -62,4 +62,8 @@ export class StudyService extends GenericService<Study> {
   public addSample(id: number, sample: Sample): Observable<any> {
     return this.http.post(`${this.baseUrl}/${id}/sample`, sample);
   }
+
+  public addExtractionist(id: number, idExtractionist: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${id}/extractionist/${idExtractionist}`,{});
+  }
 }
