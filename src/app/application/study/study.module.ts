@@ -12,6 +12,7 @@ import { ConfirmPaymentProofComponent } from './workflow/confirm-payment-proof/c
 import { DownloadSendConsentComponent } from './workflow/download-send-consent/download-send-consent.component';
 import { UploadSignedConsentComponent } from './workflow/upload-signed-consent/upload-signed-consent.component';
 import { CreateAppointmentComponent } from './workflow/create-appointment/create-appointment.component';
+import { AddSampleComponent } from './workflow/add-sample/add-sample.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CreateAppointmentComponent } from './workflow/create-appointment/create
     ConfirmPaymentProofComponent,
     DownloadSendConsentComponent,
     UploadSignedConsentComponent,
-    CreateAppointmentComponent
+    CreateAppointmentComponent,
+    AddSampleComponent
   ],
   imports: [
     CommonModule,

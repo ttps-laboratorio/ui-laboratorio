@@ -1,0 +1,33 @@
+<div class="row">
+    <h3 style="text-align: center;">Cargar datos de la muestra de sangre</h3>
+    <form [formGroup]="sampleForm" (ngSubmit)="addSample()">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Mililitros de sangre extraída</mat-label>
+                    <input type="number" matInput formControlName="milliliters" [(ngModel)]="sample.milliliters"
+                        class="field">
+                    <mat-error *ngIf="hasError('milliliters', 'required')">Campo requerido</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Freezer</mat-label>
+                    <input matInput type="number" formControlName="freezer" [(ngModel)]="sample.freezer" class="field">
+                    <mat-error *ngIf="hasError('freezer', 'required')">Campo requerido</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <button type="submit" mat-flat-button [disabled]="!sampleForm.valid" color="primary">Cargar
+                    muestra</button>
+            </div>
+        </div>
+    </form>
+</div>

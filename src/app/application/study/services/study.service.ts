@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { GenericService } from 'src/app/shared/services/generic.service';
 import { Appointment } from '../models/appointment';
 import { ConfirmPayment } from '../models/confirm-payment';
+import { Sample } from '../models/sample';
 import { SearchStudyFilter } from '../models/search-study-filter';
 import { Study } from '../models/study';
 import { StudyItem } from '../models/study-item';
@@ -56,5 +57,9 @@ export class StudyService extends GenericService<Study> {
 
   public createAppointment(id: number, appointment: Appointment): Observable<any> {
     return this.http.post(`${this.baseUrl}/${id}/appointment`, appointment);
+  }
+
+  public addSample(id: number, sample: Sample): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${id}/sample`, sample);
   }
 }

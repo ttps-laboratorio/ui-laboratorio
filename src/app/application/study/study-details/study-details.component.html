@@ -147,6 +147,9 @@
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 5">
                             <app-create-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-create-appointment>
                         </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 6 && user.isEmployee()">
+                            <app-add-sample [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-add-sample>
+                        </div>
                     </div>
 
                 </div>
