@@ -52,7 +52,7 @@ export class UploadPaymentProofComponent implements OnInit {
       }, (error => {
         this.errorService.dialogConfig = { ...this.dialogConfig };
         this.errorService.handleError(error);
-      }))
+      }));
     }
   }
 

@@ -4,7 +4,7 @@ import { User } from 'src/app/pages/auth/models';
 import { AuthService } from 'src/app/pages/auth/services';
 import { Study } from '../models/study';
 import { StudyService } from '../services/study.service';
-import {saveAs} from 'file-saver';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-study-details',
@@ -14,9 +14,9 @@ import {saveAs} from 'file-saver';
 export class StudyDetailsComponent implements OnInit {
 
   public study: Study = new Study();
-  public user:User = this.authService.user;
+  public user: User = this.authService.user;
 
-  constructor(private router: Router, private studyService: StudyService, private activeRoute: ActivatedRoute, private authService:AuthService) { }
+  constructor(private router: Router, private studyService: StudyService, private activeRoute: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit(): void {
     let id: number = this.activeRoute.snapshot.params['id'];
@@ -32,7 +32,7 @@ export class StudyDetailsComponent implements OnInit {
           this.study.patient.birthDate = new Date(this.study.patient.birthDate);
         if (this.study.createdAt !== undefined)
           this.study.createdAt = new Date(this.study.createdAt);
-        this.study.checkpoints.forEach(c  => {
+        this.study.checkpoints.forEach(c => {
           c.createdAt = new Date(c.createdAt);
           c.createdAt.setTime(this.normalizeDate(c.createdAt));
         });
@@ -42,41 +42,45 @@ export class StudyDetailsComponent implements OnInit {
     }
   }
 
-  public reloadStudy(reload:Event) {
+  public reloadStudy(reload: Event) {
     if (reload)
       this.getStudy();
   }
 
-  public downloadBudget():void {
+  public downloadBudget(): void {
     this.studyService.downloadBudget(this.study.id).subscribe((data: Blob) => {
-      const file = new Blob([data], {type: 'application/pdf'});
+      const file = new Blob([data], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);
       saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_budget.pdf');
     });
   }
 
-  public downloadPaymentProof():void{
+  public downloadPaymentProof(): void {
     this.studyService.downloadPaymentProof(this.study.id).subscribe((data: Blob) => {
-      const file = new Blob([data], {type: 'application/pdf'});
+      const file = new Blob([data], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);
       saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_payment_proof.pdf');
     });
   }
 
-  public downloadConsent():void{
+  public downloadConsent(): void {
     this.studyService.downloadConsent(this.study.id).subscribe((data: Blob) => {
-      const file = new Blob([data], {type: 'application/pdf'});
+      const file = new Blob([data], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);
       saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_consent.pdf');
     });
   }
 
-  public downloadSignedConsent():void{
+  public downloadSignedConsent(): void {
     this.studyService.downloadSignedConsent(this.study.id).subscribe((data: Blob) => {
-      const file = new Blob([data], {type: 'application/pdf'});
+      const file = new Blob([data], { type: 'application/pdf' });
       const fileURL = URL.createObjectURL(file);
       saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_signed_consent.pdf');
     });
+  }
+
+  public cancelarTurno(): void {
+
   }
 
   private normalizeDate(date: Date): number {

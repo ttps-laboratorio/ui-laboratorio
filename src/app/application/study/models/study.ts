@@ -1,5 +1,6 @@
 import { Patient } from "../../patient/models/patient";
 import { ReferringDoctor } from "../../referring-doctor/models/referring-doctor";
+import { Appointment } from "./appointment";
 import { Checkpoint } from "./checkpoint";
 import { Extractionist } from "./extractionist";
 import { PresumptiveDiagnosis } from "./presumptive-diagnosis";
@@ -20,6 +21,7 @@ export class Study {
     checkpoints: Checkpoint[];
     actualStatus: StudyStatus;
     paidExtractionAmount: boolean;
+    appointment: Appointment;
 
     constructor(){
         this.patient = new Patient();
@@ -29,6 +31,7 @@ export class Study {
         this.presumptiveDiagnosis = new PresumptiveDiagnosis();
         this.extractionist = new Extractionist();
         this.actualStatus = new StudyStatus();
+        this.appointment = new Appointment();
         this.checkpoints = [];
         this.budget = 0.0;
         this.extractionAmount = 0.0;

@@ -78,7 +78,6 @@
                             </mat-form-field>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field appearance="inline">
@@ -97,6 +96,17 @@
                                 <mat-label>Estado actual </mat-label>
                                 <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true" class="field">
                             </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="study.actualStatus.id == 6">
+                        <div class="col-md-2">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Turno </mat-label>
+                                <input matInput type="text" [value]="study.appointment.date | date: 'yyyy/MM/dd' +' '+ study.appointment.time" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-1">
+                            <button  mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button> 
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -133,6 +143,9 @@
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 4">
                             <app-upload-signed-consent [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-upload-signed-consent>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 5">
+                            <app-create-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-create-appointment>
                         </div>
                     </div>
 
