@@ -1,1 +1,64 @@
-<p>sample-batch-show works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="1280px" fxFlex.xs="100%">
+        <mat-card-title>Lote #{{this.sampleBatch.id}}</mat-card-title>
+        <mat-card-content>
+            <div class="row" *ngIf="sampleBatch.status == 'PROCESSED'">
+                <div class="col-md-6">Url de resultados: {{this.sampleBatch.finalReportsUrl}}</div>
+                <div class="col-md-6">Estado: PROCESADO</div>
+            </div>
+            <div class="row mt-4">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef > N° de muestra </th>
+                        <td mat-cell *matCellDef="let element"> #{{element.sample.id}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="studyId">
+                        <th mat-header-cell *matHeaderCellDef > N° de estudio </th>
+                        <td mat-cell *matCellDef="let element"> #{{element.id }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="showStudy">
+                        <th mat-header-cell *matHeaderCellDef> Ver Estudio </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="primary" (click)="redirectToStudy(element.id)">
+                                <mat-icon class="mat-18">reorder</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="milliliters">
+                        <th mat-header-cell *matHeaderCellDef > Mililitros </th>
+                        <td mat-cell *matCellDef="let element">{{element.sample.milliliters }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="freezer">
+                        <th mat-header-cell *matHeaderCellDef > Mililitros </th>
+                        <td mat-cell *matCellDef="let element">{{element.sample.freezer }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="noDataRow" *matNoDataRow>
+                        <td mat-cell colspan="6" class="text-center"> No data found </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+            <div class="row mt-3">
+                <form [formGroup]="sampleBatchForm" autocomplete="off" novalidate (ngSubmit)="addUrl()" *ngIf="sampleBatch.status == 'IN_PROCESS'" >
+                    <!-- *ngIf="sampleBatch.status == 'IN_PROCESS'" -->
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Url de resultados</mat-label>
+                        <input matInput type="text" formControlName="url" [(ngModel)]="sampleUrl.url" class="field">
+                        <mat-error *ngIf="hasError('url', 'required')">Url es requerida</mat-error>
+                        <mat-error *ngIf="hasError('url', 'maxlength')">Máximo 255 caracteres</mat-error>
+                    </mat-form-field>
+                    <mat-card-actions fxLayoutAlign="center center">
+                        <button type="submit" mat-flat-button [disabled]="!sampleBatchForm.valid"
+                            color="primary">Confirmar url de resultados</button>
+                        <a [routerLink]="['/app/sample-batch/list']" mat-raised-button color="accent">Volver listado</a>
+                    </mat-card-actions>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>

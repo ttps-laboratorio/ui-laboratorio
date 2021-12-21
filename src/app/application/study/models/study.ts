@@ -4,6 +4,7 @@ import { Appointment } from "./appointment";
 import { Checkpoint } from "./checkpoint";
 import { Extractionist } from "./extractionist";
 import { PresumptiveDiagnosis } from "./presumptive-diagnosis";
+import { Sample } from "./sample";
 import { StudyStatus } from "./study-status";
 import { StudyType } from "./study-type";
 
@@ -15,6 +16,7 @@ export class Study {
     referringDoctor: ReferringDoctor;
     type: StudyType;
     studyType: StudyType;
+    sample: Sample;
     presumptiveDiagnosis: PresumptiveDiagnosis;
     createdAt: Date;
     extractionist: Extractionist;
@@ -32,6 +34,7 @@ export class Study {
         this.extractionist = new Extractionist();
         this.actualStatus = new StudyStatus();
         this.appointment = new Appointment();
+        this.sample = new Sample();
         this.checkpoints = [];
         this.budget = 0.0;
         this.extractionAmount = 0.0;

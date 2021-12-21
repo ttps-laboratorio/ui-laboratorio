@@ -1,12 +1,15 @@
 import { Sample } from "../../study/models/sample";
+import { Study } from "../../study/models/study";
 
 export class SampleBatch {
-    private id?:number;
-    private status:string;
-    private samples:Sample[];
-    private finalReportsUrl:string;
+    id?:number;
+    status:string;
+    samples:Sample[];
+    finalReportsUrl:string;
+    studies:Study[];
 
     constructor(){
         this.samples = [];
+        this.studies = [];
     }
 }

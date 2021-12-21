@@ -42,6 +42,11 @@ export class StudyDetailsComponent implements OnInit {
     }
   }
 
+  public redirectToBatchSample():void {
+    let url: string = `app/sample-batch/details/${this.study.sample.sampleBatch.id}`;
+    this.router.navigate([url]);
+  }
+
   public reloadStudy(reload: Event) {
     if (reload)
       this.getStudy();

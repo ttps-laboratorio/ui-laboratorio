@@ -54,13 +54,16 @@
                         <div class="col-md-6">
                             <mat-form-field appearance="inline">
                                 <mat-label>Diagnóstico presuntivo</mat-label>
-                                <input matInput type="text" [value]="study.presumptiveDiagnosis.description" [readonly]="true" class="field">
+                                <input matInput type="text" [value]="study.presumptiveDiagnosis.description"
+                                    [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field appearance="inline">
                                 <mat-label>Médico derivante</mat-label>
-                                <input matInput type="text" [value]="study.referringDoctor.firstName +' '+study.referringDoctor.lastName" [readonly]="true" class="field">
+                                <input matInput type="text"
+                                    [value]="study.referringDoctor.firstName +' '+study.referringDoctor.lastName"
+                                    [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
                     </div>
@@ -74,7 +77,8 @@
                         <div class="col-md-6">
                             <mat-form-field appearance="inline">
                                 <mat-label>Monto de extracción</mat-label>
-                                <input matInput type="text" [value]="study.extractionAmount" [readonly]="true" class="field">
+                                <input matInput type="text" [value]="study.extractionAmount" [readonly]="true"
+                                    class="field">
                             </mat-form-field>
                         </div>
                     </div>
@@ -82,19 +86,23 @@
                         <div class="col-md-6">
                             <mat-form-field appearance="inline">
                                 <mat-label>Extracción abonada </mat-label>
-                                <input matInput type="text" [value]="(study.paidExtractionAmount)?'Sí':'No'" [readonly]="true" class="field">
+                                <input matInput type="text" [value]="(study.paidExtractionAmount)?'Sí':'No'"
+                                    [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
                         <div class="col-md-6" *ngIf="user.isPatient()">
                             <mat-form-field appearance="inline">
                                 <mat-label>Estado actual </mat-label>
-                                <input matInput type="text" [value]="(study.actualStatus.id > 6 && study.actualStatus.id < 12)?'Esperando resultado':study.actualStatus.name" [readonly]="true" class="field">
+                                <input matInput type="text"
+                                    [value]="(study.actualStatus.id > 6 && study.actualStatus.id < 12)?'Esperando resultado':study.actualStatus.name"
+                                    [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
                         <div class="col-md-6" *ngIf="!user.isPatient()">
                             <mat-form-field appearance="inline">
                                 <mat-label>Estado actual </mat-label>
-                                <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true" class="field">
+                                <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true"
+                                    class="field">
                             </mat-form-field>
                         </div>
                     </div>
@@ -102,56 +110,74 @@
                         <div class="col-md-2">
                             <mat-form-field appearance="inline">
                                 <mat-label>Turno </mat-label>
-                                <input matInput type="text" [value]="study.appointment.date | date: 'yyyy/MM/dd' +' '+ study.appointment.time" [readonly]="true" class="field">
+                                <input matInput type="text"
+                                    [value]="study.appointment.date | date: 'yyyy/MM/dd' +' '+ study.appointment.time"
+                                    [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
                         <div class="col-md-1">
-                            <button  mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button> 
+                            <button mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="study.actualStatus.id > 8 && user.isEmployee() ">
+                        <div class="col-md-2">
+                            <button mat-flat-button color="primary" (click)="redirectToBatchSample()">Ir al
+                                lote</button>
                         </div>
                     </div>
                     <div class="row mt-1">
                         <div class="col-md-3">
-                            <button  mat-flat-button color="primary" (click)="downloadBudget()">Descargar presupuesto</button>
+                            <button mat-flat-button color="primary" (click)="downloadBudget()">Descargar
+                                presupuesto</button>
                         </div>
                     </div>
                     <div class="row mt-1" *ngIf="study.actualStatus.id > 1 && study.actualStatus.id != 12">
                         <div class="col-md-3">
-                            <button  mat-flat-button color="primary" (click)="downloadPaymentProof()">Descargar comprobante de pago</button>
+                            <button mat-flat-button color="primary" (click)="downloadPaymentProof()">Descargar
+                                comprobante de pago</button>
                         </div>
                     </div>
                     <div class="row mt-1" *ngIf="study.actualStatus.id == 4">
                         <div class="col-md-3">
-                            <button  mat-flat-button color="primary" (click)="downloadConsent()">Descargar consentimiento informado</button>
+                            <button mat-flat-button color="primary" (click)="downloadConsent()">Descargar consentimiento
+                                informado</button>
                         </div>
                     </div>
                     <div class="row mt-1" *ngIf="study.actualStatus.id > 4">
                         <div class="col-md-3">
-                            <button  mat-flat-button color="primary" (click)="downloadSignedConsent()">Descargar consentimiento informado firmado</button>
+                            <button mat-flat-button color="primary" (click)="downloadSignedConsent()">Descargar
+                                consentimiento informado firmado</button>
                         </div>
                     </div>
 
                     <mat-card-subtitle style="margin-top: 1.5em;">Workflow</mat-card-subtitle>
                     <div class="row mt-1">
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 1">
-                            <app-upload-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-upload-payment-proof>
+                            <app-upload-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-upload-payment-proof>
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 2 && user.isEmployee()">
-                            <app-confirm-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-confirm-payment-proof>
+                            <app-confirm-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-confirm-payment-proof>
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 3">
-                            <app-download-send-consent [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-download-send-consent>
+                            <app-download-send-consent [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-download-send-consent>
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 4">
-                            <app-upload-signed-consent [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-upload-signed-consent>
+                            <app-upload-signed-consent [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-upload-signed-consent>
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 5">
-                            <app-create-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-create-appointment>
+                            <app-create-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-create-appointment>
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 6 && user.isEmployee()">
                             <app-add-sample [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-add-sample>
                         </div>
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 7 && user.isEmployee()">
-                            <app-add-extractionist [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-add-extractionist>
+                            <app-add-extractionist [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-add-extractionist>
                         </div>
                     </div>
 
