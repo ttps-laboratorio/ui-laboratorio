@@ -38,9 +38,13 @@ export class StudyDetailsComponent implements OnInit {
         });
         this.study.patient.birthDate.setTime(this.normalizeDate(this.study.patient.birthDate));
         this.study.createdAt.setTime(this.normalizeDate(this.study.createdAt));
-        console.log(this.study);
       });
     }
+  }
+
+  public reloadStudy(reload:Event) {
+    if (reload)
+      this.getStudy();
   }
 
   public downloadBudget():void {
@@ -48,6 +52,30 @@ export class StudyDetailsComponent implements OnInit {
       const file = new Blob([data], {type: 'application/pdf'});
       const fileURL = URL.createObjectURL(file);
       saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_budget.pdf');
+    });
+  }
+
+  public downloadPaymentProof():void{
+    this.studyService.downloadPaymentProof(this.study.id).subscribe((data: Blob) => {
+      const file = new Blob([data], {type: 'application/pdf'});
+      const fileURL = URL.createObjectURL(file);
+      saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_payment_proof.pdf');
+    });
+  }
+
+  public downloadConsent():void{
+    this.studyService.downloadConsent(this.study.id).subscribe((data: Blob) => {
+      const file = new Blob([data], {type: 'application/pdf'});
+      const fileURL = URL.createObjectURL(file);
+      saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_consent.pdf');
+    });
+  }
+
+  public downloadSignedConsent():void{
+    this.studyService.downloadSignedConsent(this.study.id).subscribe((data: Blob) => {
+      const file = new Blob([data], {type: 'application/pdf'});
+      const fileURL = URL.createObjectURL(file);
+      saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_signed_consent.pdf');
     });
   }
 

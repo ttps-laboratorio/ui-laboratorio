@@ -20,14 +20,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDialogModule} from '@angular/material/dialog';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MatRadioModule,
     MatStepperModule,
     MatAutocompleteModule,
     MatTabsModule,
@@ -53,6 +55,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatDialogModule
   ],
   exports: [
+    MatRadioModule,
     MatStepperModule,
     MatAutocompleteModule,
     MatTabsModule,
@@ -67,7 +70,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressBarModule,    
+    MatProgressBarModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatSelectModule,
@@ -78,7 +81,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatDialogModule
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
+    { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },
   ],
 })
 export class MaterialModule { }

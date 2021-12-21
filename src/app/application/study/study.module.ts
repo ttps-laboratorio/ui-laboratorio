@@ -7,13 +7,19 @@ import { StudyDetailsComponent } from './study-details/study-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StudyCreateComponent } from './study-create/study-create.component';
 import { PatientModule } from '../patient/patient.module';
+import { UploadPaymentProofComponent } from './workflow/upload-payment-proof/upload-payment-proof.component';
+import { ConfirmPaymentProofComponent } from './workflow/confirm-payment-proof/confirm-payment-proof.component';
+import { DownloadSendConsentComponent } from './workflow/download-send-consent/download-send-consent.component';
 
 
 @NgModule({
   declarations: [
     StudyListComponent,
     StudyDetailsComponent,
-    StudyCreateComponent
+    StudyCreateComponent,
+    UploadPaymentProofComponent,
+    ConfirmPaymentProofComponent,
+    DownloadSendConsentComponent
   ],
   imports: [
     CommonModule,

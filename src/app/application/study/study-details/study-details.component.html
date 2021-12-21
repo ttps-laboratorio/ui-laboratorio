@@ -99,9 +99,40 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="row">
-                        <button  mat-flat-button color="primary" (click)="downloadBudget()">Descargar presupuesto</button>
+                    <div class="row mt-1">
+                        <div class="col-md-3">
+                            <button  mat-flat-button color="primary" (click)="downloadBudget()">Descargar presupuesto</button>
+                        </div>
                     </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 1 && study.actualStatus.id != 12">
+                        <div class="col-md-3">
+                            <button  mat-flat-button color="primary" (click)="downloadPaymentProof()">Descargar comprobante de pago</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id == 4">
+                        <div class="col-md-3">
+                            <button  mat-flat-button color="primary" (click)="downloadConsent()">Descargar consentimiento informado</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 4">
+                        <div class="col-md-3">
+                            <button  mat-flat-button color="primary" (click)="downloadSignedConsent()">Descargar consentimiento informado firmado</button>
+                        </div>
+                    </div>
+
+                    <mat-card-subtitle style="margin-top: 1.5em;">Workflow</mat-card-subtitle>
+                    <div class="row mt-1">
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 1">
+                            <app-upload-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-upload-payment-proof>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 2 && user.isEmployee()">
+                            <app-confirm-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-confirm-payment-proof>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 3">
+                            <app-download-send-consent [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-download-send-consent>
+                        </div>
+                    </div>
+
                 </div>
 
                 <mat-card-actions fxLayoutAlign="center center">
