@@ -15,6 +15,7 @@ import { CreateAppointmentComponent } from './workflow/create-appointment/create
 import { AddSampleComponent } from './workflow/add-sample/add-sample.component';
 import { AddExtractionistComponent } from './workflow/add-extractionist/add-extractionist.component';
 import { AddResultInterpretationComponent } from './workflow/add-result-interpretation/add-result-interpretation.component';
+import { DeliveryToReferringDoctorComponent } from './workflow/delivery-to-referring-doctor/delivery-to-referring-doctor.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AddResultInterpretationComponent } from './workflow/add-result-interpre
     CreateAppointmentComponent,
     AddSampleComponent,
     AddExtractionistComponent,
-    AddResultInterpretationComponent
+    AddResultInterpretationComponent,
+    DeliveryToReferringDoctorComponent
   ],
   imports: [
     CommonModule,

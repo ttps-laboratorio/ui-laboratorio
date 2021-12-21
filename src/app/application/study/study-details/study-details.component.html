@@ -149,10 +149,10 @@
                                 consentimiento informado firmado</button>
                         </div>
                     </div>
-                    <div class="row mt-1" *ngIf="study.actualStatus.id >= 10">
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 11">
                         <div class="col-md-3">
                             <button mat-flat-button color="primary" (click)="downloadFinalReport()">Descargar
-                                inform final</button>
+                                informe final</button>
                         </div>
                     </div>
 
@@ -188,6 +188,10 @@
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 10 && user.isEmployee()">
                             <app-add-result-interpretation [study]="this.study" (reloadStudy)="reloadStudy($event)">
                             </app-add-result-interpretation>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 11 && user.isEmployee()">
+                            <app-delivery-to-referring-doctor [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-delivery-to-referring-doctor>
                         </div>
                     </div>
 
