@@ -131,6 +131,9 @@
                         <div class="col-md-12" *ngIf="study.actualStatus.id == 3">
                             <app-download-send-consent [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-download-send-consent>
                         </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 4">
+                            <app-upload-signed-consent [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-upload-signed-consent>
+                        </div>
                     </div>
 
                 </div>

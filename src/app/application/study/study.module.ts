@@ -10,6 +10,7 @@ import { PatientModule } from '../patient/patient.module';
 import { UploadPaymentProofComponent } from './workflow/upload-payment-proof/upload-payment-proof.component';
 import { ConfirmPaymentProofComponent } from './workflow/confirm-payment-proof/confirm-payment-proof.component';
 import { DownloadSendConsentComponent } from './workflow/download-send-consent/download-send-consent.component';
+import { UploadSignedConsentComponent } from './workflow/upload-signed-consent/upload-signed-consent.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { DownloadSendConsentComponent } from './workflow/download-send-consent/d
     StudyCreateComponent,
     UploadPaymentProofComponent,
     ConfirmPaymentProofComponent,
-    DownloadSendConsentComponent
+    DownloadSendConsentComponent,
+    UploadSignedConsentComponent
   ],
   imports: [
     CommonModule,
