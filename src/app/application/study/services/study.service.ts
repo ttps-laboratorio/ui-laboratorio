@@ -23,4 +23,8 @@ export class StudyService extends GenericService<Study> {
   public getAllItemFilter(filter:any):Observable<StudyItem[]> {
     return this.http.get<StudyItem[]>(`${this.baseUrl}`,{params: this.convertAnyToHttp([filter])});
   }
+
+  public downloadBudget(id:number):Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/${id}/budget`, { responseType: 'blob'} );
+  }
 }

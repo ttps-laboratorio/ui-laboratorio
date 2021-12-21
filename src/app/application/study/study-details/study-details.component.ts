@@ -4,6 +4,7 @@ import { User } from 'src/app/pages/auth/models';
 import { AuthService } from 'src/app/pages/auth/services';
 import { Study } from '../models/study';
 import { StudyService } from '../services/study.service';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-study-details',
@@ -42,7 +43,16 @@ export class StudyDetailsComponent implements OnInit {
     }
   }
 
+  public downloadBudget():void {
+    this.studyService.downloadBudget(this.study.id).subscribe((data: Blob) => {
+      const file = new Blob([data], {type: 'application/pdf'});
+      const fileURL = URL.createObjectURL(file);
+      saveAs(fileURL, this.study.patient.id + '_' + this.study.id + '_budget.pdf');
+    });
+  }
+
   private normalizeDate(date: Date): number {
     return date.getTime() + this.study.patient.birthDate.getTimezoneOffset() * 60 * 1000;
   }
 }
+
