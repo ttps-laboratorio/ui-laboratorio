@@ -179,6 +179,10 @@
                             <app-add-extractionist [study]="this.study" (reloadStudy)="reloadStudy($event)">
                             </app-add-extractionist>
                         </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 10 && user.isEmployee()">
+                            <app-add-result-interpretation [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-add-result-interpretation>
+                        </div>
                     </div>
 
                 </div>

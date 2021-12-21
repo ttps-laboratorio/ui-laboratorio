@@ -14,6 +14,7 @@ import { UploadSignedConsentComponent } from './workflow/upload-signed-consent/u
 import { CreateAppointmentComponent } from './workflow/create-appointment/create-appointment.component';
 import { AddSampleComponent } from './workflow/add-sample/add-sample.component';
 import { AddExtractionistComponent } from './workflow/add-extractionist/add-extractionist.component';
+import { AddResultInterpretationComponent } from './workflow/add-result-interpretation/add-result-interpretation.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AddExtractionistComponent } from './workflow/add-extractionist/add-extr
     UploadSignedConsentComponent,
     CreateAppointmentComponent,
     AddSampleComponent,
-    AddExtractionistComponent
+    AddExtractionistComponent,
+    AddResultInterpretationComponent
   ],
   imports: [
     CommonModule,
