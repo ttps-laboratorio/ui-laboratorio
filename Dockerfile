@@ -23,6 +23,8 @@ RUN  node_modules/.bin/ng build --configuration=production
 FROM nginx:1.21.0-alpine
 
 # Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/* /usr/share/nginx/html/
+COPY --from=build /usr/local/app/dist/ /usr/share/nginx/html/
+COPY --from=build /usr/local/app/conf/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/local/app/conf/default.conf /etc/nginx/conf.d/default.conf
 # Expose port 80
 EXPOSE 80
