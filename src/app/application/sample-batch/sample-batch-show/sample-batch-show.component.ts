@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
@@ -23,8 +24,9 @@ export class SampleBatchShowComponent implements OnInit {
   public sampleBatchForm: FormGroup;
   public sampleBatch: SampleBatch = new SampleBatch();
   public sampleUrl: SampleUrl = new SampleUrl();
-  public displayedColumns = ['id', 'studyId', 'showStudy', 'milliliters', 'freezer'];
+  public displayedColumns = ['id', 'studyId', 'showStudy', 'milliliters', 'freezer', 'failed'];
   public dataSource = new MatTableDataSource<Study>();
+  public selection = new SelectionModel<Study>(true, []);
   private dialogConfig: MatDialogConfig;
 
   constructor(private router: Router, private sampleBatchService: SampleBatchService, private errorService: ErrorHandlerService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
@@ -43,6 +45,7 @@ export class SampleBatchShowComponent implements OnInit {
   }
 
   public addUrl(): void {
+    this.sampleUrl.failedSamples = this.selection.selected.map(s => s.sample.id);
     this.sampleBatchService.addUrl(this.sampleBatch.id, this.sampleUrl).subscribe(
       (data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
@@ -64,6 +67,10 @@ export class SampleBatchShowComponent implements OnInit {
 
   public hasError(controlName: string, errorName: string): boolean {
     return this.sampleBatchForm.controls[controlName].hasError(errorName);
+  }
+
+  public selectFailedHandler(study: Study) {
+    this.selection.toggle(study);
   }
 
   private getSampleBatch(): void {

@@ -31,10 +31,18 @@
                         <td mat-cell *matCellDef="let element">{{element.sample.milliliters }} </td>
                     </ng-container>
                     <ng-container matColumnDef="freezer">
-                        <th mat-header-cell *matHeaderCellDef > Mililitros </th>
+                        <th mat-header-cell *matHeaderCellDef > Freezer </th>
                         <td mat-cell *matCellDef="let element">{{element.sample.freezer }} </td>
                     </ng-container>
-
+                    <ng-container matColumnDef="failed">
+                        <th mat-header-cell *matHeaderCellDef > Muestra fallida </th>
+                        <td mat-cell *matCellDef="let element">
+                            <mat-checkbox *ngIf="sampleBatch.status != 'PROCESSED'"  (click)="$event.stopPropagation()" (change)="selectFailedHandler(element)"
+                            [checked]="selection.isSelected(element)"></mat-checkbox>
+                            <span *ngIf="sampleBatch.status == 'PROCESSED'">{{element.sample.failed?'Fallida':'Exitosa'}}</span>
+                        </td>
+                    </ng-container>
+            
                     <ng-container matColumnDef="noDataRow" *matNoDataRow>
                         <td mat-cell colspan="6" class="text-center"> No data found </td>
                     </ng-container>
@@ -44,8 +52,6 @@
             </div>
             <div class="row mt-3">
                 <form [formGroup]="sampleBatchForm" autocomplete="off" novalidate (ngSubmit)="addUrl()" *ngIf="sampleBatch.status == 'IN_PROCESS'" >
-                    <!-- *ngIf="sampleBatch.status == 'IN_PROCESS'" -->
-
                     <mat-form-field appearance="fill">
                         <mat-label>Url de resultados</mat-label>
                         <input matInput type="text" formControlName="url" [(ngModel)]="sampleUrl.url" class="field">
@@ -58,6 +64,9 @@
                         <a [routerLink]="['/app/sample-batch/list']" mat-raised-button color="accent">Volver listado</a>
                     </mat-card-actions>
                 </form>
+                <mat-card-actions fxLayoutAlign="center center" *ngIf="sampleBatch.status != 'IN_PROCESS'">
+                    <a [routerLink]="['/app/sample-batch/list']" mat-raised-button color="accent">Volver listado</a>
+                </mat-card-actions>
             </div>
         </mat-card-content>
     </mat-card>
