@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="row mt-1">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button mat-flat-button color="primary" (click)="downloadPaymentProof()">Descargar comprobante de
+                    pago</button>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <h3>Confirmar comprobante de pago</h3>
+            <form autocomplete="off" novalidate (ngSubmit)="doConfirmPayment()">
+                <mat-radio-group name="confirmPayment" aria-label="¿Es válido el comprobante de pago?"
+                    [(ngModel)]="confirmPayment.confirm">
+                    <mat-radio-button value="true">Sí</mat-radio-button>
+                    <mat-radio-button value="false">No</mat-radio-button>
+                </mat-radio-group>
+                <div class="row mt-3">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="submit" mat-flat-button color="primary">Confirmar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

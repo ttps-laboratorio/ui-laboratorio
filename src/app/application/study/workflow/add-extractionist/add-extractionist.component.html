@@ -1,0 +1,25 @@
+<div class="row">
+    <h3 style="text-align: center;">Cargar extraccionista de la muestra al estudio</h3>
+    <form [formGroup]="extractionistForm" (ngSubmit)="addExtractionist()">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Extraccionista</mat-label>     
+                    <mat-select formControlName="extractionist" [(ngModel)]="extractionist.id">
+                        <mat-option *ngFor="let e of extractionistList" [value]="e.id">
+                          {{e.fullname}}
+                        </mat-option>
+                      </mat-select>
+                    <mat-error *ngIf="hasError('extractionist', 'required')">Debe seleccionar un extraccionista</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <button type="submit" mat-flat-button [disabled]="!extractionistForm.valid" color="primary">Confirmar extraccionista</button>
+            </div>
+        </div>
+    </form>
+</div>

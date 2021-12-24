@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="row mt-4">
+            <h3 *ngIf="user.isEmployee()" style="text-align: center;">Descargar consentimiento informado para enviar al paciente</h3>
+            <h3 *ngIf="user.isPatient()" style="text-align: center;">Descargar consentimiento informado</h3>
+            <div class="row mt-1">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <button mat-flat-button color="primary" (click)="downloadConsent()">Descargar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

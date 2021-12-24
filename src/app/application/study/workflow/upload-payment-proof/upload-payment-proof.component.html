@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <h3>Subir comprobante de pago</h3>
+        <form autocomplete="off" novalidate (ngSubmit)="uploadPaymentProof()">
+            <input #fileUpload accept="application/pdf" type="file" class="file-input" (change)="handleFileInput($event.target.files)" class="field">
+            <button type="submit" mat-flat-button [disabled]="fileToUpload == null" color="primary">Subir</button>
+        </form>
+    </div>
+</div>

@@ -78,7 +78,7 @@ export class StudyListComponent implements OnInit {
   }
 
   public redirectToDetails = (id: string) => {
-    let url: string = `../details/${id}`;
+    let url: string = `app/study/details/${id}`;
     this.router.navigate([url]);
   }
 

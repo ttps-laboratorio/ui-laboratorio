@@ -12,9 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+<<<<<<< HEAD
 // import { ChartsModule } from 'ng2-charts';
 
+=======
+import { ReactiveFormsModule } from '@angular/forms';
+>>>>>>> develop
 
 @NgModule({
   declarations: [
@@ -33,6 +38,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCardModule,
     MatButtonModule,
     // ChartsModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })

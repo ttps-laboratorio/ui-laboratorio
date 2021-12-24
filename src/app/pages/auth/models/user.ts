@@ -28,4 +28,17 @@ export class User {
   public canActivate(permission: string): boolean {
       return this.authorities.includes(permission);
   }
+
+  public isPatient(): boolean{
+    return this.canActivate('ROLE_PATIENT');
+  }
+  public isEmployee(): boolean{
+    return this.canActivate('ROLE_EMPLOYEE');
+  }
+  public isConfigurator(): boolean {
+    return this.canActivate('ROLE_CONFIGURATOR');
+  }
+  public isAdministrator(): boolean {
+    return this.canActivate('ROLE_ADMINISTRATOR');
+  }
 }

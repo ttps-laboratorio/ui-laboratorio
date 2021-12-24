@@ -7,4 +7,5 @@ export enum routes {
   DOCTOR = 'doctor',
   LOGIN = '/login',
   GRAPH = 'graph'
+  SAMPLE_BATCH ='sample-batch',
 }

@@ -1,1 +1,207 @@
-<p>study-details works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="100%" fxFlex.xs="100%">
+        <mat-card-title> Estudio #{{study.id}} </mat-card-title>
+        <form>
+            <mat-card-content>
+                <div class="container flex-row">
+                    <mat-card-subtitle *ngIf="!user.isPatient()">Paciente</mat-card-subtitle>
+                    <div class="row" *ngIf="!user.isPatient()">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput type="text" [value]="study.patient.firstName" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Apellido</mat-label>
+                                <input matInput type="text" [value]="study.patient.lastName" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input matInput type="text" [value]="study.patient.birthDate | date: 'dd/MM/yyyy'"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Número de documento</mat-label>
+                                <input matInput type="text" [value]="study.patient.dni" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-card-subtitle style="margin-top: 1em;">Estudio</mat-card-subtitle>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Fecha de alta</mat-label>
+                                <input matInput type="text" [value]="study.createdAt | date: 'dd/MM/yyyy'"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Tipo de estudio</mat-label>
+                                <input matInput type="text" [value]="study.type.name" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Diagnóstico presuntivo</mat-label>
+                                <input matInput type="text" [value]="study.presumptiveDiagnosis.description"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Médico derivante</mat-label>
+                                <input matInput type="text"
+                                    [value]="study.referringDoctor.firstName +' '+study.referringDoctor.lastName"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Presupuesto</mat-label>
+                                <input matInput type="text" [value]="study.budget" [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Monto de extracción</mat-label>
+                                <input matInput type="text" [value]="study.extractionAmount" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Extracción abonada </mat-label>
+                                <input matInput type="text" [value]="(study.paidExtractionAmount)?'Sí':'No'"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6" *ngIf="user.isPatient()">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Estado actual </mat-label>
+                                <input matInput type="text"
+                                    [value]="(study.actualStatus.id > 6 && study.actualStatus.id < 12)?'Esperando resultado':study.actualStatus.name"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6" *ngIf="!user.isPatient()">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Estado actual </mat-label>
+                                <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="study.actualStatus.id == 6">
+                        <div class="col-md-2">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Turno </mat-label>
+                                <input matInput type="text"
+                                    [value]="study.appointment.date | date: 'yyyy/MM/dd' +' '+ study.appointment.time"
+                                    [readonly]="true" class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-1">
+                            <button mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="study.actualStatus.id > 8 && user.isEmployee() ">
+                        <div class="col-md-2">
+                            <button mat-flat-button color="primary" (click)="redirectToBatchSample()">Ir al
+                                lote</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadBudget()">Descargar
+                                presupuesto</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 1 && study.actualStatus.id != 12">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadPaymentProof()">Descargar
+                                comprobante de pago</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id == 4">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadConsent()">Descargar consentimiento
+                                informado</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 4">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadSignedConsent()">Descargar
+                                consentimiento informado firmado</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 11">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadFinalReport()">Descargar
+                                informe final</button>
+                        </div>
+                    </div>
+
+                    <mat-card-subtitle style="margin-top: 1.5em;">Workflow</mat-card-subtitle>
+                    <div class="row mt-1">
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 1">
+                            <app-upload-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-upload-payment-proof>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 2 && user.isEmployee()">
+                            <app-confirm-payment-proof [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-confirm-payment-proof>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 3">
+                            <app-download-send-consent [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-download-send-consent>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 4">
+                            <app-upload-signed-consent [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-upload-signed-consent>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 5">
+                            <app-create-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-create-appointment>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 6 && user.isEmployee()">
+                            <app-add-sample [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-add-sample>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 7 && user.isEmployee()">
+                            <app-add-extractionist [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-add-extractionist>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 10 && user.isEmployee()">
+                            <app-add-result-interpretation [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-add-result-interpretation>
+                        </div>
+                        <div class="col-md-12" *ngIf="study.actualStatus.id == 11 && user.isEmployee()">
+                            <app-delivery-to-referring-doctor [study]="this.study" (reloadStudy)="reloadStudy($event)">
+                            </app-delivery-to-referring-doctor>
+                        </div>
+                    </div>
+
+                </div>
+
+                <mat-card-actions fxLayoutAlign="center center">
+                    <!-- <button  mat-flat-button color="primary" (click)="redirectToUpdate(study.id)">Editar</button> -->
+                    <a [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver listado</a>
+                </mat-card-actions>
+            </mat-card-content>
+        </form>
+    </mat-card>
+</section>
