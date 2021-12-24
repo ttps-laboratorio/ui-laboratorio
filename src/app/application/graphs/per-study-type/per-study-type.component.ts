@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerStudyTypeComponent implements OnInit {
 
+  chart = []; // This will hold our chart info
+
   constructor() { }
 
   ngOnInit(): void {

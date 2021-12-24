@@ -13,6 +13,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToastrModule.forRoot(),
     MatCardModule,
     MatButtonModule,
+    // ChartsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })
