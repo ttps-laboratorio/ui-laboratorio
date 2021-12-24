@@ -14,12 +14,9 @@ import { AuthModule } from './pages/auth/auth.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-<<<<<<< HEAD
 // import { ChartsModule } from 'ng2-charts';
 
-=======
 import { ReactiveFormsModule } from '@angular/forms';
->>>>>>> develop
 
 @NgModule({
   declarations: [

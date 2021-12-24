@@ -14,14 +14,14 @@ import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     GraphsListComponent,
-    PerStudyTypeComponent,
+    // PerStudyTypeComponent,
     PerMonthComponent,
-    StatsComponent
+    // StatsComponent
   ],
   imports: [
-    GraphsRoutingModule,
     CommonModule,
     SharedModule,
+    GraphsRoutingModule,
     StudyModule,
     ChartsModule
   ]

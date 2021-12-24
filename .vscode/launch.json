@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Open sidebar-employee.component.html",
+            "file": "c:\\Users\\Usuario 1\\Desktop\\Agus\\Facu\\Tercer año_Segundo Semestre\\TTPS\\ui-laboratorio\\src\\app\\shared\\sidebar-employee\\sidebar-employee.component.html"
+        }
+    ]
+}

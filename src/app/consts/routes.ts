@@ -6,6 +6,7 @@ export enum routes {
   HEALTH_INSURANCE = 'health-insurance',
   DOCTOR = 'doctor',
   LOGIN = '/login',
-  GRAPH = 'graph'
+  // REPORTS = 'reports',
+  GRAPHS = 'graphs',
   SAMPLE_BATCH ='sample-batch',
 }
