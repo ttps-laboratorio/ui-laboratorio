@@ -45,13 +45,13 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   public getTimes(): void {
-    this.appointmentService.getAvailableTimes(new Date()).subscribe((data) => {
+    this.appointmentService.getAvailableTimes(this.appointment.date).subscribe((data) => {
       this.times = data;
     });
   }
 
   public getDates(): void {
-    this.appointmentService.getAvailableDates(new Date()).subscribe((data) => {
+    this.appointmentService.getAvailableDates(this.appointment.date ? this.appointment.date: new Date()).subscribe((data) => {
       data.forEach(d => {
         let d1: Date = new Date();
         d1.setTime(Date.parse(d));

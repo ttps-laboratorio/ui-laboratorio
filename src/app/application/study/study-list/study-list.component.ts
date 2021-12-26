@@ -21,7 +21,7 @@ import {cloneDeep} from 'lodash';
 })
 export class StudyListComponent implements OnInit {
 
-  public displayedColumns = ['patient', 'creationDate', 'studyType', 'details'];
+  public displayedColumns = ['patient', 'creationDate', 'studyType', 'studyStatus', 'details'];
   public dataSource = new MatTableDataSource<StudyItem>();
   public searchStudyFilter: SearchStudyFilter = new SearchStudyFilter();
   public searchFilterForm: FormGroup;
