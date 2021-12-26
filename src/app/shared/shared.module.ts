@@ -15,12 +15,14 @@ import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SuccessDialogComponent } from './dialogs/success-dialog/success-dialog.component';
 import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.component';
+import { SidebarPatientComponent } from './sidebar-patient/sidebar-patient.component';
 
 @NgModule({
   declarations: [
     SidebarConfiguratorComponent,
     SidebarAdministratorComponent,
     SidebarEmployeeComponent,
+    SidebarPatientComponent,
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,
@@ -44,6 +46,7 @@ import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.compon
     SidebarConfiguratorComponent,
     SidebarEmployeeComponent,
     SidebarAdministratorComponent,
+    SidebarPatientComponent,
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,

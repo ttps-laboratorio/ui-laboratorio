@@ -57,7 +57,6 @@ export class AuthPageComponent {
         });
     },
       (error) => {
-        console.log(error);
         this.errorMessage = error.error.message;
         this.signupError = true;
       });

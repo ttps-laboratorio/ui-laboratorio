@@ -12,6 +12,7 @@
     <app-sidebar-configurator *ngIf='isConfigurator()'></app-sidebar-configurator>
     <app-sidebar-administrator *ngIf='isAdministrator()'></app-sidebar-administrator>
     <app-sidebar-employee *ngIf='isEmployee()'></app-sidebar-employee>
+    <app-sidebar-patient *ngIf='isPatient()'></app-sidebar-patient>
   </mat-sidenav>
   <mat-sidenav-content class="layout-content">
     <router-outlet></router-outlet>

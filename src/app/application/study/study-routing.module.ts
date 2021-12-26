@@ -7,7 +7,7 @@ import { StudyListComponent } from './study-list/study-list.component';
 
 const routes: Routes = [
   {
-    path: '', canActivate: [AuthGuard], data: { permissions: ['ROLE_EMPLOYEE'] }, children: [
+    path: '', canActivate: [AuthGuard], data: { permissions: ['ROLE_EMPLOYEE', 'ROLE_PATIENT'] }, children: [
       {
         path: 'list', component: StudyListComponent,
       },

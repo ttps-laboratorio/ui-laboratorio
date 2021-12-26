@@ -13,10 +13,10 @@ export class LayoutMenuComponent implements OnDestroy {
   @ViewChild('sidenav') sidenav: MatSidenav;
   public isShowSidebar: boolean;
   public mobileQuery: MediaQueryList;
-  public authService:AuthService;
+  public authService: AuthService;
   private mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, authService:AuthService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, authService: AuthService) {
     this.mobileQuery = media.matchMedia('(max-width: 1024px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -29,7 +29,7 @@ export class LayoutMenuComponent implements OnDestroy {
     this.sidenav.close();
   }
 
-  public isEmployee(): boolean{
+  public isEmployee(): boolean {
     return this.authService.user.canActivate('ROLE_EMPLOYEE');
   }
   public isConfigurator(): boolean {
@@ -37,5 +37,8 @@ export class LayoutMenuComponent implements OnDestroy {
   }
   public isAdministrator(): boolean {
     return this.authService.user.canActivate('ROLE_ADMINISTRATOR');
+  }
+  public isPatient(): boolean {
+    return this.authService.user.canActivate('ROLE_PATIENT');
   }
 }
