@@ -3,6 +3,7 @@ import { Observable, of, Subject } from 'rxjs';
 
 import { User } from '../models';
 import { Credentials } from '../models/credentials';
+import { PatientRegister } from '../models/patient-register';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 

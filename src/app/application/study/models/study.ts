@@ -20,7 +20,7 @@ export class Study {
     presumptiveDiagnosis: PresumptiveDiagnosis;
     createdAt: Date;
     extractionist: Extractionist;
-    checkpoints: Checkpoint[];
+   // checkpoints: Checkpoint[];
     actualStatus: StudyStatus;
     paidExtractionAmount: boolean;
     appointment: Appointment;
@@ -35,7 +35,7 @@ export class Study {
         this.actualStatus = new StudyStatus();
         this.appointment = new Appointment();
         this.sample = new Sample();
-        this.checkpoints = [];
+      //  this.checkpoints = [];
         this.budget = 0.0;
         this.extractionAmount = 0.0;
     }

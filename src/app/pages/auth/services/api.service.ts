@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Credentials } from '../models/credentials';
 import { environment } from 'src/environments/environment';
+import { PatientRegister } from '../models/patient-register';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,13 @@ export class ApiService {
     .set('Content-Type', 'application/json')
     let url = this.baseUrl + 'login';
     return this.http.post(url, credentials, {headers:headers})
+  }
+
+  registerPatient(patientRegister: PatientRegister): Observable<any> {
+    let headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    let url = environment.baseUrl + '/patient/sign-up';
+    return this.http.post(url, patientRegister, {headers:headers})
   }
 
   userInfo(): Observable<any> {
