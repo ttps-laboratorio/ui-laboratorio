@@ -9,11 +9,13 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderModule } from '../shared/header/header.module';
 import { SharedModule } from '../shared/shared.module';
+// import { PerMonthComponent } from './reports/per-month/per-month.component';
 
 @NgModule({
   declarations: [
     LayoutMenuComponent,
     HomeComponent,
+    
   ],
   imports: [
     FontAwesomeModule,
