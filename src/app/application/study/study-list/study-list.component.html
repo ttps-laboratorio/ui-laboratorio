@@ -61,6 +61,11 @@
         <td mat-cell *matCellDef="let element"> {{element.type.name}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="studyStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado</th>
+        <td mat-cell *matCellDef="let element"> {{element.actualStatus.name}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="details">
         <th mat-header-cell *matHeaderCellDef> Detalle </th>
         <td mat-cell *matCellDef="let element">
