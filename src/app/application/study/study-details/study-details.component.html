@@ -90,15 +90,7 @@
                                     [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
-                        <div class="col-md-6" *ngIf="user.isPatient()">
-                            <mat-form-field appearance="inline">
-                                <mat-label>Estado actual </mat-label>
-                                <input matInput type="text"
-                                    [value]="(study.actualStatus.id > 6 && study.actualStatus.id < 12)?'Esperando resultado':study.actualStatus.name"
-                                    [readonly]="true" class="field">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6" *ngIf="!user.isPatient()">
+                        <div class="col-md-6">
                             <mat-form-field appearance="inline">
                                 <mat-label>Estado actual </mat-label>
                                 <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true"
@@ -119,7 +111,7 @@
                             <button mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button>
                         </div>
                     </div>
-                    <div class="row" *ngIf="study.actualStatus.id > 8 && user.isEmployee() ">
+                    <div class="row" *ngIf="study.actualStatus.id > 8 && study.actualStatus.id != 13 && user.isEmployee() ">
                         <div class="col-md-2">
                             <button mat-flat-button color="primary" (click)="redirectToBatchSample()">Ir al
                                 lote</button>
@@ -131,7 +123,7 @@
                                 presupuesto</button>
                         </div>
                     </div>
-                    <div class="row mt-1" *ngIf="study.actualStatus.id > 1 && study.actualStatus.id != 12">
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 1 && study.actualStatus.id != 13">
                         <div class="col-md-3">
                             <button mat-flat-button color="primary" (click)="downloadPaymentProof()">Descargar
                                 comprobante de pago</button>
@@ -143,13 +135,19 @@
                                 informado</button>
                         </div>
                     </div>
-                    <div class="row mt-1" *ngIf="study.actualStatus.id > 4">
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 4 && study.actualStatus.id != 13">
                         <div class="col-md-3">
                             <button mat-flat-button color="primary" (click)="downloadSignedConsent()">Descargar
                                 consentimiento informado firmado</button>
                         </div>
                     </div>
-                    <div class="row mt-1" *ngIf="study.actualStatus.id > 11">
+                    <div class="row mt-1" *ngIf="study.actualStatus.id > 11 && study.actualStatus.id != 13 && user.isEmployee()">
+                        <div class="col-md-3">
+                            <button mat-flat-button color="primary" (click)="downloadFinalReport()">Descargar
+                                informe final</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1" *ngIf="study.actualStatus.id == 15 && user.isPatient()">
                         <div class="col-md-3">
                             <button mat-flat-button color="primary" (click)="downloadFinalReport()">Descargar
                                 informe final</button>
