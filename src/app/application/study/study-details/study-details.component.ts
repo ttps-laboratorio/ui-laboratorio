@@ -94,7 +94,7 @@ export class StudyDetailsComponent implements OnInit {
   }
 
   public cancelarTurno(): void {
-
+    //this.studyService.cancelAppointment(this.study.appointment.id).
   }
 
   private normalizeDate(date: Date): number {

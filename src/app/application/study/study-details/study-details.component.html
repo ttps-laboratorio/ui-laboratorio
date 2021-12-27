@@ -108,7 +108,8 @@
                             </mat-form-field>
                         </div>
                         <div class="col-md-1">
-                            <button mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button>
+                            <app-cancel-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-cancel-appointment>
+                            <!-- <button mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button> -->
                         </div>
                     </div>
                     <div class="row" *ngIf="study.actualStatus.id > 8 && study.actualStatus.id != 13 && user.isEmployee() ">
