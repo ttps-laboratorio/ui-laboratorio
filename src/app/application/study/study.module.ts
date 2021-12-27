@@ -16,10 +16,12 @@ import { AddSampleComponent } from './workflow/add-sample/add-sample.component';
 import { AddExtractionistComponent } from './workflow/add-extractionist/add-extractionist.component';
 import { AddResultInterpretationComponent } from './workflow/add-result-interpretation/add-result-interpretation.component';
 import { DeliveryToReferringDoctorComponent } from './workflow/delivery-to-referring-doctor/delivery-to-referring-doctor.component';
+import { PatientStudyListComponent } from './patient-study-list/patient-study-list.component';
 
 
 @NgModule({
   declarations: [
+    PatientStudyListComponent,
     StudyListComponent,
     StudyDetailsComponent,
     StudyCreateComponent,

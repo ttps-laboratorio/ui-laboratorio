@@ -198,7 +198,8 @@
                 </div>
 
                 <mat-card-actions fxLayoutAlign="center center">
-                    <a [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver listado</a>
+                    <a *ngIf="user.isEmployee()" [routerLink]="['/app/study/list']" mat-raised-button color="accent">Volver listado</a>
+                    <a *ngIf="user.isPatient()" [routerLink]="['/app/study/my-studies']" mat-raised-button color="accent">Volver</a>
                 </mat-card-actions>
             </mat-card-content>
         </form>
