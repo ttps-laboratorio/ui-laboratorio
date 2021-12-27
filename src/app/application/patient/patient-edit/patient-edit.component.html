@@ -20,62 +20,103 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="inline">
                     <mat-label>Número de documento</mat-label>
-                    <input matInput type="text" formControlName="dni" [(ngModel)]="selectedPatient.dni"
-                        class="field">
+                    <input matInput type="text" formControlName="dni" [(ngModel)]="selectedPatient.dni" class="field">
                     <mat-error *ngIf="hasError('dni', 'required')">Número de documento es requerido</mat-error>
                     <mat-error *ngIf="hasError('dni', 'maxlength')">Máximo 8 caracteres</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="inline">
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput [matDatepicker]="datepicker1" formControlName="birthDate" [(ngModel)]="selectedPatient.birthDate"
-                        class="field">
+                    <input matInput [matDatepicker]="datepicker1" (dateInput)="handleBirthDateChange()" formControlName="birthDate"
+                        [(ngModel)]="selectedPatient.birthDate" class="field">
                     <mat-datepicker #datepicker1></mat-datepicker>
                     <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
                     <mat-error *ngIf="hasError('birthDate', 'required')">Fecha de nacimiento es requerida</mat-error>
-                    <mat-error *ngIf="hasError('birthDate', 'invalidDate')">Fecha de nacimiento no puede ser posterior hoy</mat-error>
+                    <mat-error *ngIf="hasError('birthDate', 'invalidDate')">Fecha de nacimiento no puede ser posterior
+                        hoy</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="inline">
                     <mat-label>Obra Social</mat-label>
                     <mat-select formControlName="healthInsurance" [(ngModel)]="selectedPatient.healthInsurance.id">
-                      <mat-option *ngFor="let healthInsurance of healthInsurances" [value]="healthInsurance.id">
-                        {{healthInsurance.name}}
-                      </mat-option>
+                        <mat-option *ngFor="let healthInsurance of healthInsurances" [value]="healthInsurance.id">
+                            {{healthInsurance.name}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="inline">
                     <mat-label>Número de afiliado</mat-label>
-                    <input matInput type="text" formControlName="affiliateNumber" [(ngModel)]="selectedPatient.affiliateNumber"
-                        class="field">
+                    <input matInput type="text" formControlName="affiliateNumber"
+                        [(ngModel)]="selectedPatient.affiliateNumber" class="field">
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Historia clínica</mat-label>
-                    <textarea matInput  formControlName="clinicHistory" [(ngModel)]="selectedPatient.clinicHistory"
+                    <textarea matInput formControlName="clinicHistory" [(ngModel)]="selectedPatient.clinicHistory"
                         class="field"></textarea>
                     <mat-error *ngIf="hasError('clinicHistory', 'required')">Historia clínica es requerida</mat-error>
                 </mat-form-field>
-                <mat-card-subtitle>Datos de contacto</mat-card-subtitle>
-                <mat-form-field appearance="fill" class="inline">
-                    <mat-label>Nombre</mat-label>
-                    <input matInput type="text" formControlName="contactName" [(ngModel)]="selectedPatient.contact.name"
-                        class="field">
-                    <mat-error *ngIf="hasError('contactName', 'required')">Nombre es requerido</mat-error>
-                    <mat-error *ngIf="hasError('contactName', 'maxlength')">Máximo 60 characters</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="inline">
-                    <mat-label>Email</mat-label>
-                    <input matInput type="text" formControlName="contactEmail" [(ngModel)]="selectedPatient.contact.email"
-                        class="field">
-                    <mat-error *ngIf="hasError('contactEmail', 'required')">Email es requerido</mat-error>
-                    <mat-error *ngIf="hasError('contactEmail', 'email')">Dirección de email inválida</mat-error>
-                    <mat-error *ngIf="hasError('contactEmail', 'maxlength')">Máximo 60 caracteres</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="inline">
-                    <mat-label>Teléfono</mat-label>
-                    <input matInput type="text" formControlName="contactPhone" [(ngModel)]="selectedPatient.contact.phoneNumber"
-                        class="field">
-                    <mat-error *ngIf="hasError('contactPhone', 'required')">Teléfono es requerido</mat-error>
-                    <mat-error *ngIf="hasError('contactPhone', 'maxlength')">Máximo 12 caracteres</mat-error>
-                </mat-form-field>
+                <div *ngIf="!younger">
+                    <mat-card-subtitle>Datos de contacto</mat-card-subtitle>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Dirección</mat-label>
+                        <input matInput type="text" formControlName="address" [(ngModel)]="selectedPatient.address"
+                            class="field">
+                        <mat-error *ngIf="hasError('address', 'required')">Dirección es requerida</mat-error>
+                        <mat-error *ngIf="hasError('address', 'maxlength')">Máximo 60 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="text" formControlName="email" [(ngModel)]="selectedPatient.email"
+                            class="field">
+                        <mat-error *ngIf="hasError('email', 'required')">Email es requerido</mat-error>
+                        <mat-error *ngIf="hasError('email', 'email')">Dirección de email inválida</mat-error>
+                        <mat-error *ngIf="hasError('email', 'maxlength')">Máximo 60 caracteres</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput type="text" formControlName="phone" [(ngModel)]="selectedPatient.phoneNumber"
+                            class="field">
+                        <mat-error *ngIf="hasError('phone', 'required')">Teléfono es requerido</mat-error>
+                        <mat-error *ngIf="hasError('phone', 'maxlength')">Máximo 12 caracteres</mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="younger">
+                    <mat-card-subtitle>Tutor</mat-card-subtitle>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" formControlName="guardianFirstName" [(ngModel)]="selectedPatient.guardian.firstName"
+                            class="field">
+                        <mat-error *ngIf="hasError('guardianFirstName', 'required')">Nombre es requerido</mat-error>
+                        <mat-error *ngIf="hasError('guardianFirstName', 'maxlength')">Máximo 60 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput type="text" formControlName="guardianLastName" [(ngModel)]="selectedPatient.guardian.lastName"
+                            class="field">
+                        <mat-error *ngIf="hasError('guardianLastName', 'required')">Apellido es requerido</mat-error>
+                        <mat-error *ngIf="hasError('guardianLastName', 'maxlength')">Máximo 60 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Dirección</mat-label>
+                        <input matInput type="text" formControlName="guardianAddress" [(ngModel)]="selectedPatient.guardian.address"
+                            class="field">
+                        <mat-error *ngIf="hasError('guardianAddress', 'required')">Dirección es requerida</mat-error>
+                        <mat-error *ngIf="hasError('guardianAddress', 'maxlength')">Máximo 60 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="text" formControlName="guardianEmail" [(ngModel)]="selectedPatient.guardian.email"
+                            class="field">
+                        <mat-error *ngIf="hasError('guardianEmail', 'required')">Email es requerido</mat-error>
+                        <mat-error *ngIf="hasError('guardianEmail', 'email')">Dirección de email inválida</mat-error>
+                        <mat-error *ngIf="hasError('guardianEmail', 'maxlength')">Máximo 60 caracteres</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inline">
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput type="text" formControlName="guardianPhone" [(ngModel)]="selectedPatient.guardian.phoneNumber"
+                            class="field">
+                        <mat-error *ngIf="hasError('guardianPhone', 'required')">Teléfono es requerido</mat-error>
+                        <mat-error *ngIf="hasError('guardianPhone', 'maxlength')">Máximo 12 caracteres</mat-error>
+                    </mat-form-field>
+                </div>
                 <mat-card-actions fxLayoutAlign="center center">
                     <button type="submit" mat-flat-button [disabled]="!patientForm.valid"
                         color="primary">{{(selectedPatient.id!==undefined)?'Editar':'Crear'}}</button>

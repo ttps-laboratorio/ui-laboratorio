@@ -6,8 +6,10 @@ import { SuccessDialogComponent } from 'src/app/shared/dialogs/success-dialog/su
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { HealthInsurance } from '../../health-insurance/models/health-insurance';
 import { HealthInsuranceService } from '../../health-insurance/services/health-insurance.service';
+import { Guardian } from '../models/guardian';
 import { Patient } from '../models/patient';
 import { PatientService } from '../services/patient.service';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-patient-edit',
@@ -22,6 +24,7 @@ export class PatientEditComponent implements OnInit {
   private dialogConfig: MatDialogConfig;
   public healthInsurances: Array<HealthInsurance> = new Array<HealthInsurance>();
   loading = false;
+  public younger = false;
 
   constructor(private router: Router, private errorService: ErrorHandlerService, private patientService: PatientService, private healthInsuranceService: HealthInsuranceService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -36,9 +39,14 @@ export class PatientEditComponent implements OnInit {
       healthInsurance: new FormControl(this.selectedPatient.healthInsurance.id, [Validators.required]),
       affiliateNumber: new FormControl(this.selectedPatient.affiliateNumber),
       clinicHistory: new FormControl(this.selectedPatient.clinicHistory, [Validators.required]),
-      contactName: new FormControl(this.selectedPatient.contact.name, [Validators.required, Validators.maxLength(60)]),
-      contactEmail: new FormControl(this.selectedPatient.contact.email, [Validators.required, Validators.maxLength(60), Validators.email]),
-      contactPhone: new FormControl(this.selectedPatient.contact.phoneNumber, [Validators.required,  Validators.maxLength(12)]),
+      address: new FormControl(this.selectedPatient.address, [Validators.maxLength(60)]),
+      email: new FormControl(this.selectedPatient.email, [Validators.maxLength(60), Validators.email]),
+      phone: new FormControl(this.selectedPatient.phoneNumber, [Validators.maxLength(12)]),
+      guardianFirstName: new FormControl(this.selectedPatient.firstName, [Validators.maxLength(60)]),
+      guardianLastName: new FormControl(this.selectedPatient.lastName, [Validators.maxLength(60)]),
+      guardianAddress: new FormControl(this.selectedPatient.address, [Validators.maxLength(60)]),
+      guardianEmail: new FormControl(this.selectedPatient.email, [Validators.maxLength(60), Validators.email]),
+      guardianPhone: new FormControl(this.selectedPatient.phoneNumber, [Validators.maxLength(12)]),
     });
     this.dialogConfig = {
       height: '300px',
@@ -51,24 +59,51 @@ export class PatientEditComponent implements OnInit {
   private getPatient(): void {
     let id: number = this.activeRoute.snapshot.params['id'];
     if (id !== undefined) {
-      this.patientService.get(id).subscribe((data) => {this.selectedPatient = data;
+      this.patientService.get(id).subscribe((data) => {
+        this.selectedPatient = data;
+        if (!this.selectedPatient.guardian)
+          this.selectedPatient.guardian = new Guardian();
         this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate);
         // transform date to start of day
-        this.selectedPatient.birthDate.setTime( this.selectedPatient.birthDate.getTime() + this.selectedPatient.birthDate.getTimezoneOffset()*60*1000 );
+        this.selectedPatient.birthDate.setTime(this.selectedPatient.birthDate.getTime() + this.selectedPatient.birthDate.getTimezoneOffset() * 60 * 1000);
+        this.younger = this.isYounger(this.selectedPatient.birthDate);
       });
     }
   }
+
+  private isYounger(birthDate: Date): boolean {
+    if (birthDate == null || birthDate == undefined)
+        return false;
+    var today = new Date();
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age < 18;
+}
 
   private getHealthInsurances(): void {
     this.healthInsuranceService.getAll().subscribe((data) => this.healthInsurances = data);
   }
 
+  public handleBirthDateChange(): void {
+    this.younger = this.isYounger(this.selectedPatient.birthDate);
+  }
+
   updatePatient() {
     if (!this.patientForm.valid)
       return;
-   // this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate.getFullYear()+"-"+this.selectedPatient.birthDate.getMonth()+"-"+ this.selectedPatient.birthDate.getDate());
+    let patientCopy: Patient = cloneDeep(this.selectedPatient);
+    if (!this.younger) {
+      patientCopy.guardian = null;
+    }else{
+      patientCopy.address = null;
+      patientCopy.email = null;
+      patientCopy.phoneNumber = null;
+    }
     if (this.selectedPatient.id !== undefined) {
-      this.patientService.update(this.selectedPatient).subscribe((data) => {
+      this.patientService.update(patientCopy).subscribe((data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
         dialogRef.afterClosed()
           .subscribe(result => {
@@ -79,7 +114,7 @@ export class PatientEditComponent implements OnInit {
         this.errorService.handleError(error);
       }));
     } else {
-      this.patientService.create(this.selectedPatient).subscribe((data) => {
+      this.patientService.create(patientCopy).subscribe((data) => {
         let dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
         dialogRef.afterClosed()
           .subscribe(result => {
