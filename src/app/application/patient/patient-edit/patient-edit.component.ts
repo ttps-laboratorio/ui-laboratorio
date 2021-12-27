@@ -10,6 +10,9 @@ import { Guardian } from '../models/guardian';
 import { Patient } from '../models/patient';
 import { PatientService } from '../services/patient.service';
 import { cloneDeep } from 'lodash';
+import { User as AuthUser} from 'src/app/pages/auth/models';
+import { AuthService } from 'src/app/pages/auth/services';
+import { User } from '../../employee/models/user';
 
 @Component({
   selector: 'app-patient-edit',
@@ -18,7 +21,7 @@ import { cloneDeep } from 'lodash';
 })
 export class PatientEditComponent implements OnInit {
 
-
+  public user:AuthUser = this.authService.user;
   public patientForm: FormGroup;
   public selectedPatient: Patient = new Patient();
   private dialogConfig: MatDialogConfig;
@@ -26,7 +29,7 @@ export class PatientEditComponent implements OnInit {
   loading = false;
   public younger = false;
 
-  constructor(private router: Router, private errorService: ErrorHandlerService, private patientService: PatientService, private healthInsuranceService: HealthInsuranceService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private authService: AuthService, private errorService: ErrorHandlerService, private patientService: PatientService, private healthInsuranceService: HealthInsuranceService, private activeRoute: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getPatient();
@@ -63,6 +66,8 @@ export class PatientEditComponent implements OnInit {
         this.selectedPatient = data;
         if (!this.selectedPatient.guardian)
           this.selectedPatient.guardian = new Guardian();
+        if (!this.selectedPatient.user)
+          this.selectedPatient.user = new User();
         this.selectedPatient.birthDate = new Date(this.selectedPatient.birthDate);
         // transform date to start of day
         this.selectedPatient.birthDate.setTime(this.selectedPatient.birthDate.getTime() + this.selectedPatient.birthDate.getTimezoneOffset() * 60 * 1000);
@@ -73,15 +78,15 @@ export class PatientEditComponent implements OnInit {
 
   private isYounger(birthDate: Date): boolean {
     if (birthDate == null || birthDate == undefined)
-        return false;
+      return false;
     var today = new Date();
     var age = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
     return age < 18;
-}
+  }
 
   private getHealthInsurances(): void {
     this.healthInsuranceService.getAll().subscribe((data) => this.healthInsurances = data);
@@ -95,9 +100,11 @@ export class PatientEditComponent implements OnInit {
     if (!this.patientForm.valid)
       return;
     let patientCopy: Patient = cloneDeep(this.selectedPatient);
+    if (!this.user.isPatient())
+      patientCopy.user = null;
     if (!this.younger) {
       patientCopy.guardian = null;
-    }else{
+    } else {
       patientCopy.address = null;
       patientCopy.email = null;
       patientCopy.phoneNumber = null;

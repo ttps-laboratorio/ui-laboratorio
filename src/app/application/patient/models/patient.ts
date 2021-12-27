@@ -1,3 +1,4 @@
+import { User } from "../../employee/models/user";
 import { HealthInsurance } from "../../health-insurance/models/health-insurance";
 import { Guardian } from "./guardian";
 
@@ -14,10 +15,12 @@ export class Patient {
     email: string;
     phoneNumber: string;
     guardian:Guardian;
+    user:User;
 
     constructor() {
         this.healthInsurance = new HealthInsurance();
         this.guardian = new Guardian();
+        this.user = new User();
     }
 
 }
