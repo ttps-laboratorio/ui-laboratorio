@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { routes } from '../../consts/routes';
-import { faUserMd, faPlusSquare, faCalendarAlt, faFileMedical } from '@fortawesome/free-solid-svg-icons';
+import { faUserMd, faBars, faPlusSquare, faCalendarAlt, faFileMedical } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar-employee',
@@ -11,6 +11,7 @@ export class SidebarEmployeeComponent {
   public routes: typeof routes = routes;
   public isOpenUiElements = false;
   public faUserMd = faUserMd;
+  public faBars = faBars;
   public faFileMedical = faFileMedical;
   public faPlusSquare = faPlusSquare;
   public faCalendarAlt = faCalendarAlt;

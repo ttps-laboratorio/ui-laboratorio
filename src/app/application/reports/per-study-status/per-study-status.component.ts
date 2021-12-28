@@ -3,11 +3,11 @@ import { ReportsService } from '../services/reports.service';
 import { ApexAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
 
 @Component({
-  selector: 'app-per-study-type',
-  templateUrl: './per-study-type.component.html',
-  styleUrls: ['./per-study-type.component.css']
+  selector: 'app-per-study-status',
+  templateUrl: './per-study-status.component.html',
+  styleUrls: ['./per-study-status.component.css']
 })
-export class PerStudyTypeComponent implements OnInit {
+export class PerStudyStatusComponent implements OnInit {
 
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -20,9 +20,9 @@ export class PerStudyTypeComponent implements OnInit {
   constructor(private reportsService: ReportsService) { }
 
   ngOnInit(): void {
-    this.reportsService.getStudiesByStudyType().subscribe((data) => {
+    this.reportsService.getStudiesByStudyStatus().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
-        this.labels.push(data[i].studyTypeName);
+        this.labels.push(data[i].studyStatusName);
         this.data.push(data[i].studies);
         this.initializeChartOptions();
       }
@@ -31,7 +31,7 @@ export class PerStudyTypeComponent implements OnInit {
 
   private initializeChartOptions(): void {
     this.title = {
-      text: 'Estudios por tipo'
+      text: 'Estudios por estado del estudio'
     };
 
     this.series = [{

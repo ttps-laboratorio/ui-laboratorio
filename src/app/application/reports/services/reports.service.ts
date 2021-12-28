@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StudiesPerMonth } from '../models/studies-per-month'
 import { StudiesPerType } from '../models/studies-per-type';
+import { StudiesPerStatus } from '../models/studies-per-status';
 import { GenericService } from 'src/app/shared/services/generic.service';
 
 
@@ -23,6 +24,10 @@ export class ReportsService extends GenericService<StudiesPerMonth>{
 
     public getStudiesByStudyType(): Observable<StudiesPerType[]> {
         return this.http.get<StudiesPerType[]>(`${this.baseUrl}/studies-by-type`);
+    }
+
+    public getStudiesByStudyStatus(): Observable<StudiesPerStatus[]> {
+        return this.http.get<StudiesPerStatus[]>(`${this.baseUrl}/studies-by-status`);
     }
     
     public getValidYears(): Observable<number[]> {

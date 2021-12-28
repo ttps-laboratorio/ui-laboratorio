@@ -30,13 +30,12 @@ export class PerMonthComponent implements OnInit {
   ngOnInit(): void {
     this.reportsService.getValidYears().subscribe(data => 
       {
-        console.log(data);
         this.validYears = data; 
-        var year: number = this.validYears[this.validYears.length -1];
-        this.initializeChartData(year);
+        this.selectedYear = this.validYears[this.validYears.length -1];
+        this.initializeChartData(this.selectedYear);
       });
     this.chartForm = new FormGroup({
-      year: new FormControl(this.selectedYear),
+      selectedYear: new FormControl(this.selectedYear),
     })
   }
 
@@ -47,6 +46,8 @@ export class PerMonthComponent implements OnInit {
 
   private initializeChartData(year:number):void{
     this.reportsService.getStudiesByMonthOfYear(year).subscribe((data) => {
+      this.labels = [];
+      this.data = [];
 
       for (let i = 0; i < data.studiesByMonth.length; i++) {
         this.labels.push(data.studiesByMonth[i].month);
@@ -59,7 +60,7 @@ export class PerMonthComponent implements OnInit {
 
   private initializeChartOptions(): void {
     this.title = {
-      text: 'Estudios por mes'
+      text: 'Estudios por mes del año ' + this.selectedYear
     };
 
     this.series = [{
