@@ -60,7 +60,7 @@ export class PerMonthComponent implements OnInit {
 
   private initializeChartOptions(): void {
     this.title = {
-      text: 'Estudios por mes del año ' + this.selectedYear
+      text: 'Estudios iniciados por mes del año ' + this.selectedYear
     };
 
     this.series = [{
