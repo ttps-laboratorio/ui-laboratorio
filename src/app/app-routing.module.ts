@@ -6,7 +6,7 @@ import {AuthGuard} from './pages/auth/guards';
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch: 'full'},
   {
-    path: 'app', canActivate: [AuthGuard], data: { permissions: ["ROLE_EMPLOYEE", "ROLE_CONFIGURATOR", "ROLE_ADMINISTRATOR"] }, loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule)
+    path: 'app', canActivate: [AuthGuard], data: { permissions: ["ROLE_EMPLOYEE", "ROLE_CONFIGURATOR", "ROLE_ADMINISTRATOR", "ROLE_PATIENT"] }, loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule)
   },
   {
     path: '404',

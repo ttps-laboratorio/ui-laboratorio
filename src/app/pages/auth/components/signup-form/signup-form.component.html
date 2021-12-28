@@ -1,0 +1,38 @@
+<form class="form" [formGroup]="form" (ngSubmit)="signup()">
+    <mat-error *ngIf="this.signupError">{{errorMessage}}</mat-error>
+
+    <mat-form-field class="form__input">
+        <input matInput placeholder="DNI" type="text" formControlName="dni" [(ngModel)]="patientRegister.dni">
+        <mat-error
+            *ngIf="this.form.get('dni') && this.form.get('dni').errors?.required && (this.form.get('dni').dirty || this.form.get('dni').touched)">
+            DNI es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+        <input matInput placeholder="Email" type="text" formControlName="email"
+            [(ngModel)]="patientRegister.user.email">
+        <mat-error
+            *ngIf="this.form.get('email') && this.form.get('email').errors?.required && (this.form.get('email').dirty || this.form.get('email').touched)">
+            Email es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+        <input matInput placeholder="Nombre de usuario" type="text" formControlName="username"
+            [(ngModel)]="patientRegister.user.username">
+        <mat-error
+            *ngIf="this.form.get('username') && this.form.get('username').errors?.required && (this.form.get('username').dirty || this.form.get('username').touched)">
+            Nombre de usuario es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+        <input matInput placeholder="Contraseña" type="password" formControlName="password"
+            [(ngModel)]="patientRegister.user.password">
+        <mat-error
+            *ngIf="this.form.get('password') && this.form.get('password').errors?.required && (this.form.get('password').dirty || this.form.get('password').touched)">
+            Contraseña es requerida</mat-error>
+    </mat-form-field>
+
+    <div class="form-actions" style="margin-top: 0.2em;">
+        <button class="form-actions__signup" mat-raised-button color="primary" type="submit">Registrarse</button>
+    </div>
+</form>

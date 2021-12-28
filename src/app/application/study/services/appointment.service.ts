@@ -10,7 +10,6 @@ const action = '/appointment';
   providedIn: 'root'
 })
 export class AppointmentService extends GenericService<Appointment> {
-
   constructor(private httpClient:HttpClient) { 
     super(httpClient, `${action}`);
   }
@@ -21,5 +20,9 @@ export class AppointmentService extends GenericService<Appointment> {
 
   getAvailableTimes(date:Date):Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/available-appointments/${date.toISOString().split('T')[0]}`);
+  }
+
+  cancelAppointment(id: number):Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }

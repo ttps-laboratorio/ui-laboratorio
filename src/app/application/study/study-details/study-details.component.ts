@@ -32,10 +32,11 @@ export class StudyDetailsComponent implements OnInit {
           this.study.patient.birthDate = new Date(this.study.patient.birthDate);
         if (this.study.createdAt !== undefined)
           this.study.createdAt = new Date(this.study.createdAt);
-        this.study.checkpoints.forEach(c => {
-          c.createdAt = new Date(c.createdAt);
-          c.createdAt.setTime(this.normalizeDate(c.createdAt));
-        });
+        // if (this.study.checkpoints)
+        //   this.study.checkpoints.forEach(c => {
+        //     c.createdAt = new Date(c.createdAt);
+        //     c.createdAt.setTime(this.normalizeDate(c.createdAt));
+        //   });
         this.study.patient.birthDate.setTime(this.normalizeDate(this.study.patient.birthDate));
         this.study.createdAt.setTime(this.normalizeDate(this.study.createdAt));
       });
@@ -93,7 +94,7 @@ export class StudyDetailsComponent implements OnInit {
   }
 
   public cancelarTurno(): void {
-
+    //this.studyService.cancelAppointment(this.study.appointment.id).
   }
 
   private normalizeDate(date: Date): number {

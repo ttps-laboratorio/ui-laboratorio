@@ -16,10 +16,13 @@ import { AddSampleComponent } from './workflow/add-sample/add-sample.component';
 import { AddExtractionistComponent } from './workflow/add-extractionist/add-extractionist.component';
 import { AddResultInterpretationComponent } from './workflow/add-result-interpretation/add-result-interpretation.component';
 import { DeliveryToReferringDoctorComponent } from './workflow/delivery-to-referring-doctor/delivery-to-referring-doctor.component';
+import { PatientStudyListComponent } from './patient-study-list/patient-study-list.component';
+import { CancelAppointmentComponent } from './workflow/cancel-appointment/cancel-appointment.component';
 
 
 @NgModule({
   declarations: [
+    PatientStudyListComponent,
     StudyListComponent,
     StudyDetailsComponent,
     StudyCreateComponent,
@@ -31,7 +34,8 @@ import { DeliveryToReferringDoctorComponent } from './workflow/delivery-to-refer
     AddSampleComponent,
     AddExtractionistComponent,
     AddResultInterpretationComponent,
-    DeliveryToReferringDoctorComponent
+    DeliveryToReferringDoctorComponent,
+    CancelAppointmentComponent
   ],
   imports: [
     CommonModule,

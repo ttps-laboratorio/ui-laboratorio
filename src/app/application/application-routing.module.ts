@@ -5,7 +5,6 @@ import { LayoutMenuComponent } from './layout-menu/layout-menu.component';
 
 const routes: Routes = [
   { path: '', component: LayoutMenuComponent, children: [
-    // { path: 'admin', loadChildren: '../admin/admin.module#AdminModule'},
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'health-insurance', loadChildren: () => import('./health-insurance/health-insurance.module').then(m => m.HealthInsuranceModule)},
@@ -15,8 +14,6 @@ const routes: Routes = [
     { path: 'study', loadChildren: () => import('./study/study.module').then(m => m.StudyModule)},
     { path: 'report', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)},
     { path: 'sample-batch', loadChildren: () => import('./sample-batch/sample-batch.module').then(m => m.SampleBatchModule)},
-    // { path: 'home', loadChildren: '../home/home.module#HomeModule' },
-    // { path: 'about', loadChildren: '../about/about.module#AboutModule' }
   ]}
 ];
 

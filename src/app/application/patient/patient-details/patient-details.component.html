@@ -63,31 +63,52 @@
                         </mat-form-field>
                     </div>
 
-                    <mat-card-subtitle>Datos de contacto</mat-card-subtitle>
-                    <div class="container row">
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Nombre</mat-label>
-                                <input matInput type="text" formControlName="contactName" [ngModel]="selectedPatient.contact.name"
-                                [readonly]="true" class="field">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Email</mat-label>
-                                <input matInput type="text" formControlName="contactEmail" [ngModel]="selectedPatient.contact.email"
-                                [readonly]="true" class="field">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Teléfono</mat-label>
-                                <input matInput type="text" formControlName="contactPhone" [ngModel]="selectedPatient.contact.phoneNumber"
-                                [readonly]="true" class="field">
-                            </mat-form-field>
-                        </div>
+                    <div *ngIf="!younger">
+                        <mat-card-subtitle>Datos de contacto</mat-card-subtitle>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput type="text" formControlName="address" [(ngModel)]="selectedPatient.address"
+                                class="field">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="text" formControlName="email" [(ngModel)]="selectedPatient.email"
+                                class="field">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput type="text" formControlName="phone" [(ngModel)]="selectedPatient.phoneNumber"
+                                class="field">
+                        </mat-form-field>
                     </div>
-
+                    <div *ngIf="younger">
+                        <mat-card-subtitle>Tutor</mat-card-subtitle>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput type="text" formControlName="guardianFirstName" [(ngModel)]="selectedPatient.guardian.firstName"
+                                class="field">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput type="text" formControlName="guardianLastName" [(ngModel)]="selectedPatient.guardian.lastName"
+                                class="field">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput type="text" formControlName="guardianAddress" [(ngModel)]="selectedPatient.guardian.address"
+                                class="field">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="text" formControlName="guardianEmail" [(ngModel)]="selectedPatient.guardian.email"
+                                class="field">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="inline">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput type="text" formControlName="guardianPhone" [(ngModel)]="selectedPatient.guardian.phoneNumber"
+                                class="field">
+                        </mat-form-field>
+                    </div>
                     <mat-card-actions fxLayoutAlign="center center">
                         <button  mat-flat-button color="primary" (click)="redirectToUpdate(selectedPatient.id)">Editar</button>
                         <a [routerLink]="['/app/patient/list']" mat-raised-button color="accent">Volver</a>

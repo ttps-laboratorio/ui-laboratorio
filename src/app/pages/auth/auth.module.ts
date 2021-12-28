@@ -15,12 +15,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ConfiguratorGuard } from './guards/configurator.guard';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
     AuthPageComponent,
     YearPipe,
-    LoginFormComponent
+    LoginFormComponent,
+    SignupFormComponent
   ],
   imports: [
     HttpClientModule,
