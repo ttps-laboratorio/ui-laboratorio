@@ -1,5 +1,6 @@
+import { User } from "../../employee/models/user";
 import { HealthInsurance } from "../../health-insurance/models/health-insurance";
-import { Contact } from "./contact";
+import { Guardian } from "./guardian";
 
 export class Patient {
     id?: number;
@@ -7,13 +8,19 @@ export class Patient {
     lastName: string;
     birthDate: Date;
     dni: number;
-    contact?:Contact;
-    healthInsurance?:HealthInsurance;
-    affiliateNumber:string;
-    clinicHistory:string;
+    healthInsurance?: HealthInsurance;
+    affiliateNumber: string;
+    clinicHistory: string;
+    address: string;
+    email: string;
+    phoneNumber: string;
+    guardian:Guardian;
+    user:User;
 
     constructor() {
         this.healthInsurance = new HealthInsurance();
-        this.contact = new Contact();
+        this.guardian = new Guardian();
+        this.user = new User();
     }
+
 }
