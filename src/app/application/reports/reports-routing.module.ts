@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/pages/auth/guards';
 import { PerMonthComponent } from './per-month/per-month.component';
 import { PerStudyTypeComponent} from './per-study-type/per-study-type.component';
+import { ReportsDashboardComponent } from './reports-dashboard/reports-dashboard.component'
 
 const routes: Routes = [
   {
@@ -14,7 +15,10 @@ const routes: Routes = [
         path: 'per-study-type', component: PerStudyTypeComponent,
       },
       {
-        path: '', redirectTo: 'per-month', pathMatch: 'full'
+        path: 'dashboard', component: ReportsDashboardComponent,
+      },
+      {
+        path: '', redirectTo: 'dashboard', pathMatch: 'full'
       }
     ]
   }

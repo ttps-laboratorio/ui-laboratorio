@@ -24,5 +24,9 @@ export class ReportsService extends GenericService<StudiesPerMonth>{
     public getStudiesByStudyType(): Observable<StudiesPerType[]> {
         return this.http.get<StudiesPerType[]>(`${this.baseUrl}/studies-by-type`);
     }
+    
+    public getValidYears(): Observable<number[]> {
+        return this.http.get<number[]>(`${this.baseUrl}/years-with-studies`);
+    }
 
 }

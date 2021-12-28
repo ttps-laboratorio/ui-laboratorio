@@ -1,4 +1,22 @@
-<p>per-month works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    
+    <form [formGroup]="chartForm" (ngSubmit)="updateChart()">
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Año</mat-label>
+            <mat-select formControlName="selectedYear" [(ngModel)]="selectedYear">
+            <mat-option *ngFor="let year of validYears" [value]="year">
+                {{year}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-flat-button color="primary">Listo</button>
+
+    </form>
+
+</section>
+
 
 <apx-chart 
 [series]="series" 

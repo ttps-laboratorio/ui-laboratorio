@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApexAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
 import { ReportsService } from '../services/reports.service';
 import { ByMonth } from '../models/by-month';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-per-month',
@@ -10,6 +11,8 @@ import { ByMonth } from '../models/by-month';
 })
 export class PerMonthComponent implements OnInit {
 
+  
+
   series: ApexAxisChartSeries;
   chart: ApexChart;
   title:ApexTitleSubtitle;
@@ -17,20 +20,41 @@ export class PerMonthComponent implements OnInit {
 
   labels: Array<string> = [];
   data: Array<number> = [];
+  
+  public validYears: Array<number> = [];
+  public chartForm: FormGroup;
+  public selectedYear: number;
 
   constructor(private reportsService: ReportsService) { }
 
   ngOnInit(): void {
-    this.reportsService.getStudiesByMonthOfYear(2021).subscribe((data) => {
+    this.reportsService.getValidYears().subscribe(data => 
+      {
+        console.log(data);
+        this.validYears = data; 
+        var year: number = this.validYears[this.validYears.length -1];
+        this.initializeChartData(year);
+      });
+    this.chartForm = new FormGroup({
+      year: new FormControl(this.selectedYear),
+    })
+  }
+
+  public updateChart():void {
+    this.initializeChartData(this.selectedYear);
+    console.log('opa')
+  }
+
+  private initializeChartData(year:number):void{
+    this.reportsService.getStudiesByMonthOfYear(year).subscribe((data) => {
 
       for (let i = 0; i < data.studiesByMonth.length; i++) {
         this.labels.push(data.studiesByMonth[i].month);
         this.data.push(data.studiesByMonth[i].studies)
       }
-    });
       
-    
-    this.initializeChartOptions();
+      this.initializeChartOptions();
+    });
   }
 
   private initializeChartOptions(): void {
