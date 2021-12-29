@@ -5,7 +5,6 @@ import { PatientStudyListComponent } from './patient-study-list/patient-study-li
 import { StudyCreateComponent } from './study-create/study-create.component';
 import { StudyDetailsComponent } from './study-details/study-details.component';
 import { StudyListComponent } from './study-list/study-list.component';
-import { UnpaidSampleListComponent } from './unpaid-sample-list/unpaid-sample-list.component';
 
 const routes: Routes = [
   {
@@ -25,10 +24,6 @@ const routes: Routes = [
       },
       {
         path: 'details/:id', component: StudyDetailsComponent,
-      },
-      {
-        path: 'unpaid-samples', component: UnpaidSampleListComponent,
-        canActivate: [AuthGuard], data: { permissions: ['ROLE_EMPLOYEE'] }
       },
       {
         path: '', redirectTo: 'list', pathMatch: 'full'
