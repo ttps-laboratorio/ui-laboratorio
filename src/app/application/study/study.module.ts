@@ -35,7 +35,7 @@ import { CancelAppointmentComponent } from './workflow/cancel-appointment/cancel
     AddExtractionistComponent,
     AddResultInterpretationComponent,
     DeliveryToReferringDoctorComponent,
-    CancelAppointmentComponent
+    CancelAppointmentComponent,
   ],
   imports: [
     CommonModule,

@@ -14,6 +14,7 @@ const routes: Routes = [
     { path: 'study', loadChildren: () => import('./study/study.module').then(m => m.StudyModule)},
     { path: 'report', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)},
     { path: 'sample-batch', loadChildren: () => import('./sample-batch/sample-batch.module').then(m => m.SampleBatchModule)},
+    { path: 'unpaid-extraction', loadChildren: () => import('./unpaid-extraction/unpaid-extraction.module').then(m => m.UnpaidExtractionModule)},
   ]}
 ];
 

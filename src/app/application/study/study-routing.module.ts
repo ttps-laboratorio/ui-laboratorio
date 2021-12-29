@@ -12,15 +12,18 @@ const routes: Routes = [
       {
         path: 'my-studies',
         component: PatientStudyListComponent,
+        canActivate: [AuthGuard], data: { permissions: ['ROLE_PATIENT'] }
       },
       {
         path: 'list', component: StudyListComponent,
+        canActivate: [AuthGuard], data: { permissions: ['ROLE_EMPLOYEE'] }
       },
       {
-        path: 'create', component: StudyCreateComponent ,
+        path: 'create', component: StudyCreateComponent,
+        canActivate: [AuthGuard], data: { permissions: ['ROLE_EMPLOYEE'] }
       },
       {
-        path: 'details/:id', component: StudyDetailsComponent ,
+        path: 'details/:id', component: StudyDetailsComponent,
       },
       {
         path: '', redirectTo: 'list', pathMatch: 'full'

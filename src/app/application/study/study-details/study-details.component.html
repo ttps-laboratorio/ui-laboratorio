@@ -68,32 +68,54 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <mat-form-field appearance="inline">
                                 <mat-label>Presupuesto</mat-label>
                                 <input matInput type="text" [value]="study.budget" [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <mat-form-field appearance="inline">
                                 <mat-label>Monto de extracción</mat-label>
                                 <input matInput type="text" [value]="study.extractionAmount" [readonly]="true"
                                     class="field">
                             </mat-form-field>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <mat-form-field appearance="inline">
                                 <mat-label>Extracción abonada </mat-label>
                                 <input matInput type="text" [value]="(study.paidExtractionAmount)?'Sí':'No'"
                                     [readonly]="true" class="field">
                             </mat-form-field>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <mat-form-field appearance="inline">
                                 <mat-label>Estado actual </mat-label>
                                 <input matInput type="text" [value]="study.actualStatus.name" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-card-subtitle *ngIf="study.actualStatus.id > 6 && study.actualStatus.id != 13 && user.isEmployee()" style="margin-top: 1em;">Muestra</mat-card-subtitle>
+                    <div class="row" *ngIf="study.actualStatus.id > 6 && study.actualStatus.id != 13 && user.isEmployee()">
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Muestra extraída en mililitros</mat-label>
+                                <input matInput type="text" [value]="study.sample.milliliters" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="inline">
+                                <mat-label>N° de freezer</mat-label>
+                                <input matInput type="text" [value]="study.sample.freezer" [readonly]="true"
+                                    class="field">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3" *ngIf="study.actualStatus.id > 7">
+                            <mat-form-field appearance="inline">
+                                <mat-label>Médico extraccionista</mat-label>
+                                <input matInput type="text" [value]="study.extractionist.fullname" [readonly]="true"
                                     class="field">
                             </mat-form-field>
                         </div>
@@ -109,7 +131,6 @@
                         </div>
                         <div class="col-md-1">
                             <app-cancel-appointment [study]="this.study" (reloadStudy)="reloadStudy($event)"></app-cancel-appointment>
-                            <!-- <button mat-flat-button color="primary" (click)="cancelarTurno()">Cancelar turno</button> -->
                         </div>
                     </div>
                     <div class="row" *ngIf="study.actualStatus.id > 8 && study.actualStatus.id != 13 && user.isEmployee() ">

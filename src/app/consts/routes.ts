@@ -7,5 +7,6 @@ export enum routes {
   DOCTOR = 'doctor',
   REPORT = 'report',
   SAMPLE_BATCH ='sample-batch',
+  UNPAID_EXTRACTION='unpaid-extraction',
   LOGIN = '/login'
 }
