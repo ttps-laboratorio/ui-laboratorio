@@ -45,8 +45,16 @@ export class PerStudyTypeComponent implements OnInit {
 
     }
     this.xaxis= {
-      categories: this.labels
+      categories: this.labels,
+      labels: {
+        maxHeight: 300,
+        
+        rotate: -25,
+        style: {
+            fontSize: '14px',
+        },
     }
+  }
 
   }
 
