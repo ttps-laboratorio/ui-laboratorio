@@ -15,9 +15,9 @@ const routes: Routes = [
       {
         path: 'per-study-type', component: PerStudyTypeComponent,
       },
-      // {
-      //   path: 'per-study-status', component: PerStudyStatusComponent,
-      // },
+      {
+        path: 'per-study-status', component: PerStudyStatusComponent,
+      },
       {
         path: 'dashboard', component: ReportsDashboardComponent,
       },

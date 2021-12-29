@@ -36,18 +36,25 @@ export class PerStudyStatusComponent implements OnInit {
 
     this.series = [{
       name: 'Estudios',
-      data: this.data
+      data: this.data,
     }];
 
     this.chart = {
       type: 'bar',
-      height: 450,
+      height: 650,
 
     }
     this.xaxis= {
-      categories: this.labels
+      categories: this.labels,
+      labels: {
+        maxHeight: 500,
+        rotate: -55,
+        style: {
+            fontSize: '14px',
+        },
     }
 
   }
+}
 
 }
