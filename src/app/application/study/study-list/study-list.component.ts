@@ -52,7 +52,6 @@ export class StudyListComponent implements OnInit {
       if (filter.studyType.id == 0)
       filter.studyType.id = null;
     let filter2 = { "dni" : filter.dni, "studyTypeId": filter.studyType.id, "studyStatusId" : filter.studyStatus.id };
-   // this.studyService.getAllItem(filter).subscribe((data) => this.dataSource.data = data);
    this.studyService.getAllItemFilter(filter2).subscribe((data) => this.dataSource.data = data);
   }
 
